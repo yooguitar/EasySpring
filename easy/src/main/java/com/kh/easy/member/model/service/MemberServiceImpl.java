@@ -20,4 +20,10 @@ public class MemberServiceImpl implements MemberService {
 		memberMapper.join(requestMember);
 	}
 
+	@Override
+	public void login(MemberDTO requestMember) {
+		String request = requestMember.getUserId();
+		MemberDTO test = memberMapper.login(request);
+	}
+
 }

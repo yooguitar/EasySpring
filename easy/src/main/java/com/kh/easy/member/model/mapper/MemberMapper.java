@@ -8,6 +8,8 @@ import com.kh.easy.member.model.dto.MemberDTO;
 public interface MemberMapper { 
 
 	void join(MemberDTO requestMember);
+
+	MemberDTO login(String request);
 	
 	
 
