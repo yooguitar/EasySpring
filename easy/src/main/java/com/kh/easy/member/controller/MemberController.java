@@ -23,8 +23,7 @@ public class MemberController {
 	@PostMapping("join")
 	public ResponseEntity<String> join(@Valid @RequestBody MemberDTO requestMember){
 		memberService.join(requestMember);
-		log.info("json {}:", requestMember);
-		return null;
+		return ResponseEntity.ok("회원가입에 성공했습니다.");
 	}
 	
 	@PostMapping("login")

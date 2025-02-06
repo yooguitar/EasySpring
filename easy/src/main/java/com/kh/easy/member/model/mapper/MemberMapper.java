@@ -10,6 +10,8 @@ public interface MemberMapper {
 	void join(MemberDTO requestMember);
 
 	MemberDTO login(String request);
+
+	MemberDTO findByUserId(String userId);
 	
 	
 

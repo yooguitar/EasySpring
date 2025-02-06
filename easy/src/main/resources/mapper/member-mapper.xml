@@ -33,6 +33,14 @@
 	  	   USER_ID = #{userId}
 </select>
 
+<select id="findByUserId" parameterType="String" resultType="com.kh.easy.member.model.dto.MemberDTO">
+	SELECT
+		   USER_ID userId
+ 	  FROM	
+ 	       MEMBER
+ 	 WHERE
+ 	 	   USER_ID = #{userId}
+</select>
 
 
 </mapper>

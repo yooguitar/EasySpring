@@ -17,6 +17,18 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public void join(MemberDTO requestMember) {
+		if("".equals(requestMember.getUserId()) || "".equals(requestMember.getUserPwd())) {
+			// 빈 문자열 입력 예외처리
+		}
+		MemberDTO searched = memberMapper.findByUserId(requestMember.getUserId());
+		if(searched != null) {
+			// 중복 id 예외처리
+		}
+		// 인코딩 해서 저장해야됨 import
+		//MemberDTO member = MemberDTO.builder().userId(requestMember.getUserId()).userPwd(passwordEncoder.encode(requestMember.getUserPwd()).email(requestMember.getEmail()).build(); 
+		
+		// 회원가입 마저 해결하기 + 시큐리티
+		
 		memberMapper.join(requestMember);
 	}
 
