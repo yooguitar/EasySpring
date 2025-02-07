@@ -19,7 +19,7 @@
 		)
 </insert>
 
-<select id="login" parameterType="String" resultType="com.kh.easy.member.model.dto.MemberDTO">
+<select id="login" parameterType="String" resultType="MemberDTO">
 	SELECT
 	       USER_ID userId,
 	       USER_PWD userPwd,
@@ -33,7 +33,7 @@
 	  	   USER_ID = #{userId}
 </select>
 
-<select id="findByUserId" parameterType="String" resultType="com.kh.easy.member.model.dto.MemberDTO">
+<select id="findByUserId" parameterType="String" resultType="MemberDTO">
 	SELECT
 		   USER_ID userId
  	  FROM	

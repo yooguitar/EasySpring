@@ -12,8 +12,6 @@ import lombok.ToString;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-@Builder
 public class MemberDTO {
 	
 	@Pattern(regexp = "[a-zA-Z0-9]*$", message = "아이디는 영어나 숫자만 입력 가능합니다.")

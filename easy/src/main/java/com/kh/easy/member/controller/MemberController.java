@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kh.easy.auth.service.AuthenticationService;
 import com.kh.easy.member.model.dto.MemberDTO;
 import com.kh.easy.member.model.service.MemberService;
 
@@ -19,7 +20,8 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class MemberController {
 	private final MemberService memberService;
-
+	private final AuthenticationService authService;
+	
 	@PostMapping("join")
 	public ResponseEntity<String> join(@Valid @RequestBody MemberDTO requestMember){
 		memberService.join(requestMember);
@@ -27,8 +29,10 @@ public class MemberController {
 	}
 	
 	@PostMapping("login")
-	public ResponseEntity<?> login(@RequestBody MemberDTO requestMember) {
-		memberService.login(requestMember);
+	public ResponseEntity<?> login(@Valid @RequestBody MemberDTO requestMember) {
+		// memberService.login(requestMember);
+		authService.login(requestMember);
+		
 		return null;
 	}
 }
