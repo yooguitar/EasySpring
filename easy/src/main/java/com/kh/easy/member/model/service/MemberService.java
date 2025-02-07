@@ -6,4 +6,5 @@ public interface MemberService {
 
 	void join(MemberDTO requestMember);
 
+
 }

@@ -19,21 +19,28 @@
 		)
 </insert>
 
+<select id="login" parameterType="String" resultType="MemberDTO">
+	SELECT
+	       USER_ID userId,
+	       USER_PWD userPwd,
+	       EMAIL,
+	       ROLE,
+	       STATUS,
+	       ENROLL_DATE enrollDate
+	  FROM	
+	       MEMBER
+	 WHERE
+	  	   USER_ID = #{userId}
+</select>
 
-
-<!--
-	<select id="findByUserId" parameterType="string" resultType="com.kh.secom.member.model.vo.Member">
-		SELECT
-			   USER_NO userNo,
-		 	   USER_ID userId,
-		 	   USER_PWD userPwd,
-		 	   ROLE
-		  FROM
-		  	   TB_MEMBER
-		 WHERE
-		 	   USER_ID = #{userId}
-	</select>
--->
+<select id="findByUserId" parameterType="String" resultType="MemberDTO">
+	SELECT
+		   USER_ID userId
+ 	  FROM	
+ 	       MEMBER
+ 	 WHERE
+ 	 	   USER_ID = #{userId}
+</select>
 
 
 </mapper>
