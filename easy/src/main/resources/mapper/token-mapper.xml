@@ -16,14 +16,6 @@
 			   )
 	</insert>
 
-	<delete id="deleteExpiredRefreshToken">
-		DELETE 
-		  FROM
-		  	   TB_REFRESH_TOKEN 
-		 WHERE 
-		 	   USER_NO = #{userNo} 
-		   AND 
-		 	   EXPIRED_AT <![CDATA[ < ]]> #{currentTime}
-	</delete>
+
 
 </mapper>

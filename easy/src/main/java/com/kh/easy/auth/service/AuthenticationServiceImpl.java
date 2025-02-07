@@ -5,9 +5,10 @@ import java.util.Map;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import com.kh.easy.auth.model.vo.CustomUserDetails;
 import com.kh.easy.member.model.dto.MemberDTO;
 import com.kh.easy.token.model.service.TokenService;
 
@@ -27,11 +28,17 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(requestMember.getUserId(), requestMember.getUserPwd()));
-		UserDetails user = (UserDetails)authentication.getPrincipal();
-		
-		tokenService.generateToken(user.getUsername());
-		
-		return null;
+
+		CustomUserDetails user = (CustomUserDetails) authentication.getPrincipal();
+
+		Map<String, String> tokens = tokenService.generateToken(user.getUsername());
+
+		return tokens;
 	}
 
+	public CustomUserDetails getAuthenticatedUser() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		CustomUserDetails user = (CustomUserDetails) auth.getPrincipal();
+		return user;
+	}
 }

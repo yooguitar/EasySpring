@@ -3,6 +3,7 @@ package com.kh.easy.member.model.service;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.kh.easy.exception.DuplicateUserException;
 import com.kh.easy.member.model.dto.Member;
 import com.kh.easy.member.model.dto.MemberDTO;
 import com.kh.easy.member.model.mapper.MemberMapper;
@@ -22,7 +23,7 @@ public class MemberServiceImpl implements MemberService {
 	public void join(MemberDTO requestMember) {
 		MemberDTO searched = memberMapper.findByUserId(requestMember.getUserId());
 		if(searched != null) {
-			// 중복 id 예외처리 필요
+			throw new DuplicateUserException("이미 존재하는 아이디 입니다");
 		}
 		Member member = 
 				Member.builder()
@@ -32,10 +33,5 @@ public class MemberServiceImpl implements MemberService {
 		memberMapper.join(member);
 	}
 
-//	@Override
-//	public void login(MemberDTO requestMember) {
-//		String request = requestMember.getUserId();
-//		MemberDTO test = memberMapper.login(request);
-//	}
 
 }
