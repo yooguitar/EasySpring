@@ -16,6 +16,25 @@
 			   )
 	</insert>
 
+	<delete id="deleteExpiredRefreshToken" parameterType="DeleteTokenDTO">
+		DELETE
+		  FROM	
+		       REFRESH_TOKEN
+		 WHERE
+		 	   USER_ID = #{username}
+		   AND
+		   	   EXPIRED_AT <![CDATA[ < ]]> #{currentTime}
+	</delete>
 
+	<select id="findByToken" parameterType="RefreshTokenDTO" resultType="RefreshTokenDTO">
+		SELECT
+			   USER_ID username,
+			   TOKEN token,
+			   EXPIRED_AT expiration
+		  FROM
+		       REFRESH_TOKEN
+		 WHERE
+		 	   TOKEN=#{refreshToken}
+	</select>
 
 </mapper>
