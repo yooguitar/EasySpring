@@ -14,4 +14,9 @@ public class GlobalExceptionHandler {
 	public ResponseEntity<String> handleDuplicateUser(DuplicateUserException e){
 		return ResponseEntity.badRequest().body(e.getMessage());
 	}
+	
+	@ExceptionHandler(MismatchPasswordException.class)
+	public ResponseEntity<?> handleMismatchPassword(MismatchPasswordException e){
+		return ResponseEntity.badRequest().body(e.getMessage());
+	}
 }
