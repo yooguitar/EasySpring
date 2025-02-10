@@ -41,6 +41,7 @@ public interface MemberMapper {
 	
 	ArrayList<Member> searchByEmail(String searched);
 
+
 	
 	
 

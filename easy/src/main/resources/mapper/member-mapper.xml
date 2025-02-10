@@ -16,6 +16,7 @@
 </sql>
 
 <!-- 회원 서비스 -->
+
 <insert id="join">
 	INSERT 
 	  INTO 

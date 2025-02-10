@@ -64,4 +64,5 @@ public class MemberServiceImpl implements MemberService {
 		}
 		return userDetails.getUsername();
 	}
+
 }
