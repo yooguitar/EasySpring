@@ -1,10 +1,16 @@
 package com.kh.easy.admin.service;
 
-import java.util.ArrayList;
-
-import com.kh.easy.member.model.dto.Member;
-
 public interface AdminService {
  
-	ArrayList<Member> findAll();
+	/* 회원 관리 콘솔 */
+	String findMembers();
+	String findMembersAsc();
+	String findAdmin();
+	String findAliveMembers();
+	String findDeadMembers();
+	String sortIdAsc();
+	String sortIdDesc();
+	// 검색 기능
+	void searchById(String searched);
+	void searchByEmail(String searched);
 }

@@ -3,7 +3,19 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kh.easy.member.model.mapper.MemberMapper">
+<sql id="selectAllFromMember">
+	SELECT
+		   USER_ID userId,
+		   USER_PWD userPwd,
+		   EMAIL,
+		   ROLE,
+		   STATUS,
+		   ENROLL_DATE enrollDate
+	  FROM
+	  	   MEMBER
+</sql>
 
+<!-- 회원 서비스 -->
 <insert id="join">
 	INSERT 
 	  INTO 
@@ -60,7 +72,73 @@
 	   	   STATUS = 'N'
 	 WHERE
 	 	   USER_ID=#{username}
- 	  
 </update>
+
+
+
+<!-- 회원 관리 콘솔 -->
+<select id="findMembers" resultType="Member">
+	<include refid="selectAllFromMember" />
+	 WHERE
+	 	   ROLE = 'ROLE_USER'
+	 ORDER
+	 	BY
+	 	   ENROLL_DATE DESC
+</select>
+
+<select id="findMembersAsc" resultType="Member">
+	<include refid="selectAllFromMember" />
+	 WHERE
+	 	   ROLE = 'ROLE_USER'
+	 ORDER
+	 	BY
+	 	   ENROLL_DATE ASC
+</select>
+
+<select id="findAdmin" resultType="Member">
+	<include refid="selectAllFromMember" />
+	WHERE
+		  ROLE = 'ROLE_ADMIN'
+	ORDER
+	   BY
+	   	  ENROLL_DATE DESC
+</select>
+
+<select id="findAliveMembers" resultType="Member">
+	<include refid="selectAllFromMember" />
+	WHERE
+		  STATUS = 'Y'
+	ORDER
+	   BY
+	   	  ENROLL_DATE DESC
+</select>
+
+<select id="findDeadMembers" resultType="Member">
+	<include refid="selectAllFromMember" />
+	WHERE
+		  STATUS = 'N'
+	ORDER
+	   BY
+	   	  ENROLL_DATE DESC
+</select>
+
+<select id="sortIdAsc" resultType="Member">
+	<include refid="selectAllFromMember" />
+	WHERE
+	 	  STATUS = 'Y'
+	ORDER
+	   BY
+	   	  USER_ID ASC
+</select>
+
+<select id="sortIdDesc" resultType="Member">
+	<include refid="selectAllFromMember" />
+	WHERE
+		  STATUS = 'Y'
+	ORDER
+	   BY
+	   	  USER_ID DESC
+</select>
+
 
 </mapper>

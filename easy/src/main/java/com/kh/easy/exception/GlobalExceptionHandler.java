@@ -19,4 +19,9 @@ public class GlobalExceptionHandler {
 	public ResponseEntity<?> handleMismatchPassword(MismatchPasswordException e){
 		return ResponseEntity.badRequest().body(e.getMessage());
 	}
+	
+	@ExceptionHandler(NoSuchDataException.class)
+	public ResponseEntity<?> handleNoData(NoSuchDataException e){
+		return ResponseEntity.badRequest().body(e.getMessage());
+	}
 }
