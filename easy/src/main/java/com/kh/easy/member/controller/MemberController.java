@@ -30,6 +30,15 @@ public class MemberController {
 	
 	@PostMapping("join")
 	public ResponseEntity<String> join(@Valid @RequestBody MemberDTO requestMember){
+		/* 더미 데이터 생성기		 
+		for(int i = 100; i != 200; i ++) {
+			MemberDTO users = new MemberDTO();
+			users.setUserId("user" + i);
+			users.setUserPwd("pass" + i);
+			users.setEmail("mail" + i + "@kh.com");
+			memberService.join(users);
+		}
+		*/
 		memberService.join(requestMember);
 		return ResponseEntity.ok("회원가입에 성공했습니다.");
 	}
