@@ -1,9 +1,11 @@
 package com.kh.easy.member.model.mapper;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.session.RowBounds;
 
 import com.kh.easy.member.model.dto.Member;
 import com.kh.easy.member.model.dto.MemberDTO;
@@ -23,25 +25,32 @@ public interface MemberMapper {
 	void deleteByPassword(String username);
 
 	/* 관리자 회원 관리 */
-	ArrayList<Member> findMembers();
-
-	ArrayList<Member> findMembersAsc();
-
-	ArrayList<Member> findAdmin();
-
-	ArrayList<Member> findAliveMembers();
 	
-	ArrayList<Member> findDeadMembers();
+	int findTotalCount();
 
-	ArrayList<Member> sortIdAsc();
+	List<Member> findMemberList(RowBounds rowBounds);
+	
+	List<Member> findMemberListAsc(RowBounds rowBounds);
 
-	ArrayList<Member> sortIdDesc();
+	List<Member> findByMail(RowBounds memberList);
 
+	List<Member> findByMailAsc(RowBounds memberList);
+
+	List<Member> findByStatus(RowBounds memberList);
+
+	List<Member> findByStatusAsc(RowBounds memberList);
+
+	List<Member> findByDate(RowBounds memberList);
+
+	List<Member> findByDateAsc(RowBounds memberList);
+
+	List<Member> findAdmin(RowBounds memberList);
+
+
+	
 	ArrayList<Member> searchById(String searched);
 	
 	ArrayList<Member> searchByEmail(String searched);
-
-
 	
 	
 

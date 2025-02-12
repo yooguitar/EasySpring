@@ -78,22 +78,85 @@
 
 
 <!-- 회원 관리 콘솔 -->
-<select id="findMembers" resultType="Member">
-	<include refid="selectAllFromMember" />
+<select id="findTotalCount" resultType="int">
+	SELECT
+		   COUNT(*)
+	  FROM	
+	       MEMBER
 	 WHERE
-	 	   ROLE = 'ROLE_USER'
-	 ORDER
-	 	BY
-	 	   ENROLL_DATE DESC
+	 	   STATUS = 'Y'
 </select>
 
-<select id="findMembersAsc" resultType="Member">
+<select id="findMemberList" resultType="Member">
 	<include refid="selectAllFromMember" />
 	 WHERE
 	 	   ROLE = 'ROLE_USER'
 	 ORDER
-	 	BY
-	 	   ENROLL_DATE ASC
+	    BY
+	       USER_ID DESC
+</select>
+
+<select id="findMemberListAsc" resultType="Member">
+	<include refid="selectAllFromMember" />
+	 WHERE
+	 	   ROLE = 'ROLE_USER'
+	 ORDER
+	    BY
+	       USER_ID ASC
+</select>
+
+<select id="findByMail" resultType="Member">
+	<include refid="selectAllFromMember" />
+	WHERE
+		  ROLE = 'ROLE_USER'
+	ORDER
+	   BY
+	   	  EMAIL DESC
+</select>
+
+<select id="findByMailAsc" resultType="Member">
+	<include refid="selectAllFromMember" />
+	WHERE
+		  ROLE = 'ROLE_USER'
+	ORDER
+	   BY
+	   	  EMAIL ASC
+</select>
+
+<select id="findByStatus" resultType="Member">
+	<include refid="selectAllFromMember" />
+	WHERE
+	 	  ROLE = 'ROLE_USER'
+	ORDER
+	   BY
+	   	  STATUS DESC
+</select>
+
+<select id="findByStatusAsc" resultType="Member">
+	<include refid="selectAllFromMember" />
+	WHERE
+		  ROLE = 'ROLE_USER'
+	ORDER
+	   BY
+	   	  STATUS ASC
+</select>
+
+<select id="findByDate" resultType="Member">
+	<include refid="selectAllFromMember" />
+	WHERE
+		  ROLE = 'ROLE_USER'
+	ORDER
+	   BY
+	   	  ENROLL_DATE DESC
+</select>
+
+<select id="findByDateAsc" resultType="Member">
+	<include refid="selectAllFromMember" />
+	WHERE
+		  ROLE = 'ROLE_USER'
+	ORDER
+	   BY
+	   	  ENROLL_DATE ASC
 </select>
 
 <select id="findAdmin" resultType="Member">
@@ -102,44 +165,11 @@
 		  ROLE = 'ROLE_ADMIN'
 	ORDER
 	   BY
-	   	  ENROLL_DATE DESC
+	      USER_ID DESC
 </select>
 
-<select id="findAliveMembers" resultType="Member">
-	<include refid="selectAllFromMember" />
-	WHERE
-		  STATUS = 'Y'
-	ORDER
-	   BY
-	   	  ENROLL_DATE DESC
-</select>
 
-<select id="findDeadMembers" resultType="Member">
-	<include refid="selectAllFromMember" />
-	WHERE
-		  STATUS = 'N'
-	ORDER
-	   BY
-	   	  ENROLL_DATE DESC
-</select>
 
-<select id="sortIdAsc" resultType="Member">
-	<include refid="selectAllFromMember" />
-	WHERE
-	 	  STATUS = 'Y'
-	ORDER
-	   BY
-	   	  USER_ID ASC
-</select>
-
-<select id="sortIdDesc" resultType="Member">
-	<include refid="selectAllFromMember" />
-	WHERE
-		  STATUS = 'Y'
-	ORDER
-	   BY
-	   	  USER_ID DESC
-</select>
 
 
 </mapper>
