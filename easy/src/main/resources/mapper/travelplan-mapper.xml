@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.easy.travelplan.model.mapper.TravelPlanMapper">
+
+	<select id="selectPlanCode">
+		SELECT NVL(MAX(PLAN_CODE), 0) + 1 
+		FROM TB_TRAVEL_PLAN 
+		WHERE USER_ID = #{userId}
+	</select>
+
+	<insert id="addTravelPlan">
+		INSERT INTO TB_TRAVEL_PLAN
+		VALUES (SEQ_PLAN_ID.NEXTVAL, #{planCode}, #{userId}, #{placeName}
+			  , #{placeAddress}, #{phone}, #{category}, #{lat}, #{lng}
+			  , #{linkUrl}, #{userMemo})
+	</insert>
+
+	<select id="selectTravelPlan">
+		SELECT PLAN_CODE AS planCode,
+			   USER_ID AS userId,
+			   PLACE_NAME AS placeName,
+			   PLACE_ADDRESS AS placeAddress,
+			   PHONE,
+			   CATEGORY,
+			   LAT,
+			   LNG,
+			   LINK_URL AS linkUrl,
+			   USER_MEMO AS userMemo
+		  FROM
+			   TB_TRAVEL_PLAN
+		 WHERE
+			   USER_ID = #{userId}
+	</select>
+
+</mapper>
