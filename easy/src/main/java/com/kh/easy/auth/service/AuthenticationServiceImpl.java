@@ -32,7 +32,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 		CustomUserDetails user = (CustomUserDetails) authentication.getPrincipal();
 
 		Map<String, String> tokens = tokenService.generateToken(user.getUsername());
-
+		
 		return tokens;
 	}
 

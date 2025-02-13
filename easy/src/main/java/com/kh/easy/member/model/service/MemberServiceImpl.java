@@ -65,4 +65,9 @@ public class MemberServiceImpl implements MemberService {
 		return userDetails.getUsername();
 	}
 
+	@Override
+	public String getRole(MemberDTO requestMember) {
+		return memberMapper.getRole(requestMember);
+	}
+
 }

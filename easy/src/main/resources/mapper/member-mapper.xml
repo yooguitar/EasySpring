@@ -75,8 +75,6 @@
 	 	   USER_ID=#{username}
 </update>
 
-
-
 <!-- 회원 관리 콘솔 -->
 <select id="findTotalCount" resultType="int">
 	SELECT

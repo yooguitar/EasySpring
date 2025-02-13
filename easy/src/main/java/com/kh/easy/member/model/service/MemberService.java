@@ -11,9 +11,11 @@ public interface MemberService {
 
 	void join(MemberDTO requestMember);
 
-	void changePassword(@Valid ChangePasswordDTO changeEntity);
+	void changePassword(ChangePasswordDTO changeEntity);
 
 	void deleteByPassword(Map<String, String> password);
+
+	String getRole(MemberDTO requestMember);
 
 
 }

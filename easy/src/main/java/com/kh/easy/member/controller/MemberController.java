@@ -33,6 +33,9 @@ public class MemberController {
 	
 	@PostMapping("join")
 	public ResponseEntity<String> join(@Valid @RequestBody MemberDTO requestMember){
+		memberService.join(requestMember);
+		return ResponseEntity.ok("회원가입에 성공했습니다.");
+		
 //		for(int i = 100; i != 200; i ++) {
 //			MemberDTO users = new MemberDTO();
 //			users.setUserId("user" + i);
@@ -40,15 +43,13 @@ public class MemberController {
 //			users.setEmail("mail" + i + "@kh.com");
 //			memberService.join(users);
 //		}
-		
-		memberService.join(requestMember);
-		return ResponseEntity.ok("회원가입에 성공했습니다.");
 	}
 	
 	@PostMapping("login")
 	public ResponseEntity<LoginResponse> login(@Valid @RequestBody MemberDTO requestMember) {
 		Map<String, String> tokens = authService.login(requestMember);
-		LoginResponse response = LoginResponse.builder().username(requestMember.getUserId()).tokens(tokens).build();
+		String role = memberService.getRole(requestMember);
+		LoginResponse response = LoginResponse.builder().username(requestMember.getUserId()).role(role).tokens(tokens).build();
 		return ResponseEntity.ok(response);
 	}
 	

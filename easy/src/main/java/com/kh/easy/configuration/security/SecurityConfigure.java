@@ -51,7 +51,7 @@ public class SecurityConfigure {
 				.cors(Customizer.withDefaults())
 				.authorizeHttpRequests(requests -> {
 					requests.requestMatchers("/admin/**").hasRole("ADMIN");
-					requests.requestMatchers("/member", "/member/login").permitAll();
+					requests.requestMatchers("/member", "/member/login", "/member/join").permitAll();
 					requests.requestMatchers(HttpMethod.PUT, "/member/**").authenticated();
 					requests.requestMatchers(HttpMethod.POST, "/member/refresh").authenticated();
 				})

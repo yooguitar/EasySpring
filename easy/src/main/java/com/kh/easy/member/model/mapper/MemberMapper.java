@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.session.RowBounds;
 
 import com.kh.easy.member.model.dto.Member;
@@ -23,6 +24,10 @@ public interface MemberMapper {
 	void changePassword(Map<String, String> changeRequest);
 
 	void deleteByPassword(String username);
+	
+	/* 토큰 */
+	@Select("SELECT ROLE FROM MEMBER WHERE USER_ID=#{userId}")
+	String getRole(MemberDTO username);
 
 	/* 관리자 회원 관리 */
 	

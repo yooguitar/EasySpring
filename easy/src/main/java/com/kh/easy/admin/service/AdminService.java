@@ -1,7 +1,7 @@
 package com.kh.easy.admin.service;
 
 public interface AdminService {
- 
+
 	/* 회원 관리 콘솔 */
 	String findMembers(int page);
 	String findMembersAsc(int page);
