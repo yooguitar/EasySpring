@@ -3,6 +3,7 @@ package com.kh.easy.member.controller;
 import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +16,7 @@ import com.kh.easy.member.model.dto.ChangePasswordDTO;
 import com.kh.easy.member.model.dto.LoginResponse;
 import com.kh.easy.member.model.dto.MemberDTO;
 import com.kh.easy.member.model.service.MemberService;
+import com.kh.easy.token.model.service.TokenService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberController {
 	private final MemberService memberService;
 	private final AuthenticationService authService;
+	private final TokenService tokenService;
 	
 	@PostMapping("join")
 	public ResponseEntity<String> join(@Valid @RequestBody MemberDTO requestMember){
@@ -61,5 +64,17 @@ public class MemberController {
 		return ResponseEntity.ok("삭제 완료!");
 	}
 	
+	@PostMapping("refresh")
+	public ResponseEntity<Map> refresh(@RequestBody Map<String, String> tokens){
+		String refreshToken = tokens.get("refreshToken");
+		Map<String, String> newTokens = tokenService.refreshTokens(refreshToken);
+		return ResponseEntity.ok(newTokens);
+	}
+	
+//	@DeleteMapping("deleteRefToken")
+//	public void deleteRefToken(@RequestBody Map<String, String> username) {
+//		log.info("뭐가 오니",username);
+//		//tokenService.deleteRefToken(username);
+//	}
 	
 }

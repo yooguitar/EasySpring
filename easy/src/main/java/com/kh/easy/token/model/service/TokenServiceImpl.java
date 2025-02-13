@@ -64,4 +64,9 @@ public class TokenServiceImpl implements TokenService {
 		tokenMapper.deleteExpiredRefreshToken(expiredToken);
 	}
 
+	@Override
+	public void deleteRefToken(Map<String, String> username) {
+		tokenMapper.deleteRefToken(username);
+	}
+
 }
