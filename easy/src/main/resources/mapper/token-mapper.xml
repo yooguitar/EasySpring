@@ -36,5 +36,13 @@
 		 WHERE
 		 	   TOKEN=#{refreshToken}
 	</select>
+	
+	<delete id="deleteRefToken" parameterType="Map">
+		DELETE
+		  FROM	
+		       REFRESH_TOKEN
+		 WHERE
+		 	   USER_ID = #{username}
+	</delete>
 
 </mapper>

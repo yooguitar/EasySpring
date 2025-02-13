@@ -1,5 +1,7 @@
 package com.kh.easy.token.model.mapper;
 
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.kh.easy.token.model.dto.DeleteTokenDTO;
@@ -13,5 +15,7 @@ public interface TokenMapper {
 	void deleteExpiredRefreshToken(DeleteTokenDTO expiredToken);
 
 	RefreshTokenDTO findByToken(String refreshToken);
+
+	void deleteRefToken(Map<String, String> username);
 
 }
