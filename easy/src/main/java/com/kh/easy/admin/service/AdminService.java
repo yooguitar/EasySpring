@@ -1,9 +1,11 @@
 package com.kh.easy.admin.service;
 
+import java.util.Map;
+
 public interface AdminService {
 
 	/* 회원 관리 콘솔 */
-	String findMembers(int page);
+	Map<String, String> findMembers(int page);
 	String findMembersAsc(int page);
 	String findByMail(int page);
 	String findByMailAsc(int page);

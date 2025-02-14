@@ -1,7 +1,9 @@
 package com.kh.easy.admin.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
@@ -47,6 +49,7 @@ public class AdminServiceImpl implements AdminService {
 	private PageInfo getPageInfo(int totalCount, int page) {
 		return Pagination.getPageInfo(totalCount, page, 10, 10);
 	}
+	
 	private RowBounds getMemberList(PageInfo pageInfo){
 		int offset = (pageInfo.getCurrentPage() -1) * pageInfo.getBoardLimit();
 		return new RowBounds(offset, pageInfo.getBoardLimit());
@@ -61,11 +64,21 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public String findMembers(int currentPage) {
-		int count = totalCount(currentPage);
-		PageInfo pageInfo = getPageInfo(count, currentPage);
-		List<Member>result = memberMapper.findMemberList(getMemberList(pageInfo));
-		return JsonTranslator(result);
+	public Map<String, String> findMembers(int currentPage) {
+		// 앞단에 조회 결과와 총 행 개수를 같이 전달해줘야 함
+		int countRows = 0;
+		countRows = totalCount(currentPage);
+		PageInfo pageInfo = getPageInfo(countRows, currentPage);
+		List<Member> result = memberMapper.findMemberList(getMemberList(pageInfo));
+		String resultString = JsonTranslator(result);
+		Map<String, String> resultMap = new HashMap();
+		resultMap.put("resultString", resultString);
+		resultMap.put("countRows", Long.valueOf(countRows));
+		
+		//반환타입 고쳐야됨
+		
+		
+		return resultMap; 
 	}
 
 	public String findMembersAsc(int currentPage) {
@@ -79,8 +92,7 @@ public class AdminServiceImpl implements AdminService {
 	public String findByMail(int currentPage) {
 		int count = totalCount(currentPage);
 		PageInfo pageInfo = getPageInfo(count, currentPage);
-		List<Member>result = memberMapper.findByMail(getMemberList(pageInfo));
-		return JsonTranslator(result);
+		return JsonTranslator(memberMapper.findByMail(getMemberList(pageInfo)));
 	}
 
 	@Override

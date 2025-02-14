@@ -57,11 +57,12 @@
  	 	   USER_ID = #{userId}
 </select>
 
-<update id="changePassword" parameterType="HashMap">
+<update id="updateInfo" parameterType="HashMap">
 	UPDATE
 		   MEMBER
 	   SET
-	   	   USER_PWD=#{password}
+	   	   USER_PWD=#{password},
+	   	   EMAIL=#{email}
 	 WHERE
 	 	   USER_ID=#{username}
 </update>

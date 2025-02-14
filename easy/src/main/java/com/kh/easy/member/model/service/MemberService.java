@@ -9,7 +9,7 @@ public interface MemberService {
 
 	void join(MemberDTO requestMember);
 
-	void changePassword(ChangePasswordDTO changeEntity);
+	void updateInfo(ChangePasswordDTO changeEntity);
 
 	void deleteByPassword(Map<String, String> password);
 

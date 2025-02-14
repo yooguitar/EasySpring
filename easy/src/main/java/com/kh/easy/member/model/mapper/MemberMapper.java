@@ -21,7 +21,7 @@ public interface MemberMapper {
 
 	MemberDTO findByUserId(String userId);
 
-	void changePassword(Map<String, String> changeRequest);
+	void updateInfo(Map<String, String> changeRequest);
 
 	void deleteByPassword(String username);
 	

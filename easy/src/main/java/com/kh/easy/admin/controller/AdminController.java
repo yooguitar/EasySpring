@@ -1,5 +1,7 @@
 package com.kh.easy.admin.controller;
 
+import java.util.Map;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,8 +31,9 @@ public class AdminController {
 	 * @return [{response}, {response}..]
 	 */
 	@GetMapping("findMembers")
-	public ResponseEntity<String> findMembers(@RequestParam(value="page", defaultValue="1") int page){
-		return ResponseEntity.ok(adminService.findMembers(page));
+	public ResponseEntity<?> findMembers(@RequestParam(value="page", defaultValue="1") int page){
+		Map<String, String> resultMap = adminService.findMembers(page);
+		return ResponseEntity.ok(resultMap);
 	}
 	@GetMapping("findMembersAsc")
 	public ResponseEntity<String> findMembersAsc(@RequestParam(value="page", defaultValue="1") int page){

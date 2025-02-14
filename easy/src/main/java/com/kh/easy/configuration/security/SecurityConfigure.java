@@ -53,7 +53,7 @@ public class SecurityConfigure {
 					requests.requestMatchers("/admin/**").hasRole("ADMIN");
 					requests.requestMatchers("/member", "/member/login", "/member/join").permitAll();
 					requests.requestMatchers(HttpMethod.GET, "/member/findUser").authenticated();
-					requests.requestMatchers(HttpMethod.PUT, "/member/**").authenticated();
+					requests.requestMatchers(HttpMethod.PUT, "/member/updateInfo").authenticated();
 					requests.requestMatchers(HttpMethod.POST, "/member/refresh").authenticated();
 				})
 				.sessionManagement(

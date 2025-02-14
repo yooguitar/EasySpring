@@ -33,6 +33,7 @@ public class MemberController {
 	
 	@PostMapping("join")
 	public ResponseEntity<String> join(@Valid @RequestBody MemberDTO requestMember){
+		log.info("{}", requestMember);
 		memberService.join(requestMember);
 		return ResponseEntity.ok("회원가입에 성공했습니다.");
 		
@@ -43,6 +44,7 @@ public class MemberController {
 //			users.setEmail("mail" + i + "@kh.com");
 //			memberService.join(users);
 //		}
+//		return null;
 	}
 	
 	@PostMapping("login")
@@ -59,10 +61,10 @@ public class MemberController {
 		return ResponseEntity.ok(result);
 	}
 	
-	@PutMapping("changePassword")
-	public ResponseEntity<?> changePassword(@Valid @RequestBody ChangePasswordDTO changeEntity){
-		memberService.changePassword(changeEntity);
-		return ResponseEntity.ok("비밀번호 변경 성공!");
+	@PutMapping("updateInfo")
+	public ResponseEntity<?> updateInfo(@Valid @RequestBody ChangePasswordDTO changeEntity){
+		memberService.updateInfo(changeEntity);
+		return ResponseEntity.ok("정보 수정 성공!");
 	}
 	
 	@PutMapping("delete")

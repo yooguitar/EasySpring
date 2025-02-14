@@ -40,14 +40,14 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void changePassword(@Valid ChangePasswordDTO changeEntity) {
+	public void updateInfo(@Valid ChangePasswordDTO changeEntity) {
 		String username = passwordMatches(changeEntity.getCurrentPassword());
 		String encodedPassword = passwordEncoder.encode(changeEntity.getNewPassword());
 		Map<String, String> changeRequest = new HashMap();
 		changeRequest.put("username", username);
 		changeRequest.put("password", encodedPassword);
-		memberMapper.changePassword(changeRequest);
-
+		changeRequest.put("email", changeEntity.getEmail());
+		memberMapper.updateInfo(changeRequest);
 	}
 
 	@Override
