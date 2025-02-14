@@ -18,4 +18,10 @@ public interface TravelPlanMapper {
 	// userId로 비교하여 모든 여행계획 가져오기
 	List<TravelPlanDTO> selectTravelPlan(String userId);
 	
+	// 플랜에 추가되어있는 장소 업데이트하기
+	void updateTravelPlan(TravelPlanDTO plan);
+
+	// 플랜에 추가되어있는 장소 삭제하기
+	void deleteTravelPlan(TravelPlanDTO plan);
+	
 }

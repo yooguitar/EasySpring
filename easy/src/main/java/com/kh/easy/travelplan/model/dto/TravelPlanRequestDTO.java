@@ -14,5 +14,8 @@ import lombok.ToString;
 @ToString
 @Builder
 public class TravelPlanRequestDTO {
-    private List<TravelPlanDTO> travlePlan;
+	
+	// 배열로 넘어온 플랜을 List로 받는 DTO클래스
+    private List<TravelPlanDTO> travelPlan;
+    
 }

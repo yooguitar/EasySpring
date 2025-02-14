@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.kh.easy.exception.travel.NotEnoughLocationsException;
+import com.kh.easy.exception.travel.PlanStorageFullException;
 import com.kh.easy.travelplan.model.dto.TravelPlanDTO;
 import com.kh.easy.travelplan.model.mapper.TravelPlanMapper;
 
@@ -34,9 +36,22 @@ public class TravelPlanServiceImpl implements TravelPlanService {
 		// planCode는 미리 구하고 값을 넣은상태에서 진행
 		int planCode = mapper.selectPlanCode(userId);
 		if(planCode > 6) {
-			throw new RuntimeException("최대 6개의 계획만 저장할 수 있습니다.");
+			throw new PlanStorageFullException("최대 6개의 계획만 저장할 수 있습니다.");
 		}
+		
+		
+		log.info("들어온 장소의 개수 : {}", travelPlan.size());
 
+		// 선택된 장소의 개수가 3개보다 적으면 생성 불가능.
+		if(travelPlan.size() < 3) {
+			throw new NotEnoughLocationsException("장소를 최소 3곳 선택해야합니다.");
+		}
+		
+		// 선택된 장소의 개수가 7개보다 적어야 생성 가능
+		if(travelPlan.size() > 6) {
+			throw new NotEnoughLocationsException("장소는 최대 6곳까지 선택 가능합니다.");
+		}
+		
 		// List에 들어있는 값 만큼 반복
 		for(TravelPlanDTO dto : travelPlan) {
 			dto.setPlanCode(planCode);
@@ -65,13 +80,28 @@ public class TravelPlanServiceImpl implements TravelPlanService {
 	}
 
 	@Override
-	public void updateTravelPlan() {
+	public void updateTravelPlan(TravelPlanDTO plan) {
 
+		mapper.updateTravelPlan(plan);
+		
 	}
 
+	
 	@Override
-	public void deleteTravelPlan() {
-
+	public void deleteTravelPlace(TravelPlanDTO plan) {
+		
+		mapper.deleteTravelPlan(plan);
+		
 	}
+
+	
+	@Override
+	public void updateUserMemo(String userId, String userMemo) {
+		
+		
+		
+		
+	}
+
 
 }

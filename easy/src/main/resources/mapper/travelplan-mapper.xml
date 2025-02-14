@@ -12,13 +12,14 @@
 
 	<insert id="addTravelPlan">
 		INSERT INTO TB_TRAVEL_PLAN
-		VALUES (SEQ_PLAN_ID.NEXTVAL, #{planCode}, #{userId}, #{placeName}
+		VALUES (SEQ_PLAN_ID.NEXTVAL, #{planCode}, #{planOrder}, #{userId}, #{placeName}
 			  , #{placeAddress}, #{phone}, #{category}, #{lat}, #{lng}
 			  , #{linkUrl}, #{userMemo})
 	</insert>
 
 	<select id="selectTravelPlan">
 		SELECT PLAN_CODE AS planCode,
+			   PLAN_ORDER AS planOrder,
 			   USER_ID AS userId,
 			   PLACE_NAME AS placeName,
 			   PLACE_ADDRESS AS placeAddress,
@@ -32,6 +33,32 @@
 			   TB_TRAVEL_PLAN
 		 WHERE
 			   USER_ID = #{userId}
+		 ORDER
+		 	BY
+		 	   planOrder asc
 	</select>
+	
+	<update id="updateTravelPlan" parameterType="com.kh.easy.travelplan.model.dto.TravelPlanDTO">
+		  UPDATE TB_TRAVEL_PLAN
+		     SET
+		    	 USER_ID       = #{userId},
+		    	 PLACE_NAME    = #{placeName},
+		    	 PLACE_ADDRESS = #{placeAddress},
+		    	 PHONE         = #{phone},
+		    	 CATEGORY      = #{category},
+		    	 LAT           = #{lat},
+		    	 LNG           = #{lng},
+		    	 LINK_URL      = #{linkUrl}
+		   WHERE PLAN_CODE     = #{planCode}
+		     AND PLAN_ORDER    = #{planOrder}
+	</update>
+	
+	<delete id="deleteTravelPlan">
+		DELETE
+		  FROM TB_TRAVEL_PLAN
+		 WHERE USER_ID    = #{userId}
+		   AND PLAN_CODE  = #{planCode}
+		   AND PLAN_ORDER = #{planOrder}
+	</delete>
 
 </mapper>
