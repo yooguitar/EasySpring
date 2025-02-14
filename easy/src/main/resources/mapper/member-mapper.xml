@@ -3,6 +3,19 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kh.easy.member.model.mapper.MemberMapper">
+<sql id="selectAllFromMember">
+	SELECT
+		   USER_ID userId,
+		   USER_PWD userPwd,
+		   EMAIL,
+		   ROLE,
+		   STATUS,
+		   ENROLL_DATE enrollDate
+	  FROM
+	  	   MEMBER
+</sql>
+
+<!-- 회원 서비스 -->
 
 <insert id="join">
 	INSERT 
@@ -31,6 +44,8 @@
 	       MEMBER
 	 WHERE
 	  	   USER_ID = #{userId}
+	   AND
+	       STATUS = 'Y'
 </select>
 
 <select id="findByUserId" parameterType="String" resultType="MemberDTO">
@@ -41,6 +56,118 @@
  	 WHERE
  	 	   USER_ID = #{userId}
 </select>
+
+<update id="changePassword" parameterType="HashMap">
+	UPDATE
+		   MEMBER
+	   SET
+	   	   USER_PWD=#{password}
+	 WHERE
+	 	   USER_ID=#{username}
+</update>
+
+<update id="deleteByPassword" parameterType="String">
+	UPDATE
+		   MEMBER
+	   SET
+	   	   STATUS = 'N'
+	 WHERE
+	 	   USER_ID=#{username}
+</update>
+
+<!-- 회원 관리 콘솔 -->
+<select id="findTotalCount" resultType="int">
+	SELECT
+		   COUNT(*)
+	  FROM	
+	       MEMBER
+	 WHERE
+	 	   STATUS = 'Y'
+</select>
+
+<select id="findMemberList" resultType="Member">
+	<include refid="selectAllFromMember" />
+	 WHERE
+	 	   ROLE = 'ROLE_USER'
+	 ORDER
+	    BY
+	       USER_ID DESC
+</select>
+
+<select id="findMemberListAsc" resultType="Member">
+	<include refid="selectAllFromMember" />
+	 WHERE
+	 	   ROLE = 'ROLE_USER'
+	 ORDER
+	    BY
+	       USER_ID ASC
+</select>
+
+<select id="findByMail" resultType="Member">
+	<include refid="selectAllFromMember" />
+	WHERE
+		  ROLE = 'ROLE_USER'
+	ORDER
+	   BY
+	   	  EMAIL DESC
+</select>
+
+<select id="findByMailAsc" resultType="Member">
+	<include refid="selectAllFromMember" />
+	WHERE
+		  ROLE = 'ROLE_USER'
+	ORDER
+	   BY
+	   	  EMAIL ASC
+</select>
+
+<select id="findByStatus" resultType="Member">
+	<include refid="selectAllFromMember" />
+	WHERE
+	 	  ROLE = 'ROLE_USER'
+	ORDER
+	   BY
+	   	  STATUS DESC
+</select>
+
+<select id="findByStatusAsc" resultType="Member">
+	<include refid="selectAllFromMember" />
+	WHERE
+		  ROLE = 'ROLE_USER'
+	ORDER
+	   BY
+	   	  STATUS ASC
+</select>
+
+<select id="findByDate" resultType="Member">
+	<include refid="selectAllFromMember" />
+	WHERE
+		  ROLE = 'ROLE_USER'
+	ORDER
+	   BY
+	   	  ENROLL_DATE DESC
+</select>
+
+<select id="findByDateAsc" resultType="Member">
+	<include refid="selectAllFromMember" />
+	WHERE
+		  ROLE = 'ROLE_USER'
+	ORDER
+	   BY
+	   	  ENROLL_DATE ASC
+</select>
+
+<select id="findAdmin" resultType="Member">
+	<include refid="selectAllFromMember" />
+	WHERE
+		  ROLE = 'ROLE_ADMIN'
+	ORDER
+	   BY
+	      USER_ID DESC
+</select>
+
+
+
 
 
 </mapper>

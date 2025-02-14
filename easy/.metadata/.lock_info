@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #Sat Feb 08 13:39:52 KST 2025
 host=yooguitarPC
 process-id=4308
@@ -9,3 +10,9 @@ host=DESKTOP-CAENF9J
 process-id=11060
 user=user1
 >>>>>>> 1a0e65e2f3fe120cd57df93f6891ea3364ca4ce7
+=======
+#Mon Feb 10 10:44:43 KST 2025
+host=DESKTOP-G90NJMU
+process-id=7356
+user=user1
+>>>>>>> dev

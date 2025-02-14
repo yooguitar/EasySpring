@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.easy.auth.model.vo.CustomUserDetails;
 import com.kh.easy.auth.util.JwtUtil;
+import com.kh.easy.member.model.mapper.MemberMapper;
 import com.kh.easy.token.model.dto.DeleteTokenDTO;
 import com.kh.easy.token.model.dto.RefreshTokenDTO;
 import com.kh.easy.token.model.mapper.TokenMapper;
@@ -47,9 +48,11 @@ public class TokenServiceImpl implements TokenService {
 	private Map<String, String> createTokens(String username) {
 		String accessToken = tokenUtil.getAccessToken(username);
 		String refreshToken = tokenUtil.getRefreshToken(username);
+		
 		Map<String, String> tokens = new HashMap();
 		tokens.put("accessToken", accessToken);
 		tokens.put("refreshToken", refreshToken);
+
 		return tokens;
 	}
 
@@ -62,6 +65,12 @@ public class TokenServiceImpl implements TokenService {
 	private void deleteExpiredRefreshToken(String username) {
 		DeleteTokenDTO expiredToken = new DeleteTokenDTO(username, System.currentTimeMillis());
 		tokenMapper.deleteExpiredRefreshToken(expiredToken);
+	}
+
+	@Override
+	public void deleteRefToken(Map<String, String> username) {
+		// 미구현
+		tokenMapper.deleteRefToken(username);
 	}
 
 }

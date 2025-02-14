@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @Getter
 public class LoginResponse {
 	private String username;
+	private String role;
 	private Map<String, String> tokens;
 
 }

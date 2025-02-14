@@ -1,5 +1,10 @@
 /.metadata/
 /secom
 .secom
+<<<<<<< HEAD
 .metadata
 /metadata
+=======
+/metadata
+.metadata
+>>>>>>> dev
