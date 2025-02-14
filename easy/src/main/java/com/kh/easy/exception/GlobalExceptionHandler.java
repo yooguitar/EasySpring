@@ -19,21 +19,6 @@ public class GlobalExceptionHandler {
 		return ResponseEntity.badRequest().body(e.getMessage());
 	}
 
-	@ExceptionHandler(PlanStorageFullException.class)
-	public ResponseEntity<?> handlerFullPlanStorage(PlanStorageFullException e) {
-		return ResponseEntity.badRequest().body(e.getMessage());
-	}
-
-	@ExceptionHandler(NotEnoughLocationsException.class)
-	public ResponseEntity<?> handlerNotEnoughLocations(NotEnoughLocationsException e) {
-		return ResponseEntity.badRequest().body(e.getMessage());
-	}
-
-	@ExceptionHandler(TooManyLocationsException.class)
-	public ResponseEntity<?> handlerTooMantLocations(TooManyLocationsException e) {
-		return ResponseEntity.badRequest().body(e.getMessage());
-	}
-
 	@ExceptionHandler(MismatchPasswordException.class)
 	public ResponseEntity<?> handleMismatchPassword(MismatchPasswordException e) {
 		return ResponseEntity.badRequest().body(e.getMessage());
@@ -41,6 +26,24 @@ public class GlobalExceptionHandler {
 
 	@ExceptionHandler(NoSuchDataException.class)
 	public ResponseEntity<?> handleNoData(NoSuchDataException e) {
+		return ResponseEntity.badRequest().body(e.getMessage());
+	}
+	
+	
+	/* 여행플랜 관련 예외처리 */
+	
+	@ExceptionHandler(PlanStorageFullException.class)
+	public ResponseEntity<?> handlerFullPlanStorage(PlanStorageFullException e) {
+		return ResponseEntity.badRequest().body(e.getMessage());
+	}
+	
+	@ExceptionHandler(NotEnoughLocationsException.class)
+	public ResponseEntity<?> handlerNotEnoughLocations(NotEnoughLocationsException e) {
+		return ResponseEntity.badRequest().body(e.getMessage());
+	}
+	
+	@ExceptionHandler(TooManyLocationsException.class)
+	public ResponseEntity<?> handlerTooMantLocations(TooManyLocationsException e) {
 		return ResponseEntity.badRequest().body(e.getMessage());
 	}
 }
