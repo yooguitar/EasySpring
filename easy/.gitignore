@@ -7,10 +7,12 @@ build/
 
 ### STS ###
 .apt_generated
-.classpath
 .factorypath
+
+.classpath
 .project
 .settings
+
 .springBeans
 .sts4-cache
 bin/

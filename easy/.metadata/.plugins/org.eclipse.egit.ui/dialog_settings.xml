@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
-<<<<<<< HEAD
-=======
-	<section name="ImportExportAction">
-		<item key="ImportExportPage.STORE_SELECTED_IMPORT_WIZARD_ID" value="org.eclipse.e4.ui.importer.wizard"/>
-		<list key="ImportExportPage.STORE_EXPANDED_IMPORT_CATEGORIES">
-			<item value="org.eclipse.ui.Basic"/>
-		</list>
-		<section name="ImportExportWizard.dialogBounds">
+	<section name="GitImportWizard">
+		<section name="GitImportWizard.dialogBounds">
 			<item key="DIALOG_X_ORIGIN" value="204"/>
 			<item key="DIALOG_Y_ORIGIN" value="47"/>
 			<item key="DIALOG_WIDTH" value="617"/>
@@ -15,5 +9,4 @@
 			<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>
 		</section>
 	</section>
->>>>>>> 1a0e65e2f3fe120cd57df93f6891ea3364ca4ce7
 </section>
