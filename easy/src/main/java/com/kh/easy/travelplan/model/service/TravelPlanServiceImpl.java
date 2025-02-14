@@ -90,10 +90,16 @@ public class TravelPlanServiceImpl implements TravelPlanService {
 	@Override
 	public void deleteTravelPlace(TravelPlanDTO plan) {
 		
-		mapper.deleteTravelPlan(plan);
+		mapper.deleteTravelPlace(plan);
 		
 	}
 
+	@Override
+	public void deleteTravelPlan(TravelPlanDTO plan) {
+
+		mapper.deleteTravelPlan(plan);
+		
+	}
 	
 	@Override
 	public void updateUserMemo(String userId, String userMemo) {
@@ -102,6 +108,7 @@ public class TravelPlanServiceImpl implements TravelPlanService {
 		
 		
 	}
+
 
 
 }

@@ -19,5 +19,7 @@ public interface TravelPlanService {
 	void deleteTravelPlace(TravelPlanDTO plan);
 
 	void updateUserMemo(String userId, String userMemo);
+
+	void deleteTravelPlan(TravelPlanDTO plan);
 	
 }

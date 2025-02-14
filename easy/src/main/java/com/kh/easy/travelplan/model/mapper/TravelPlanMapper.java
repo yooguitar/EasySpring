@@ -23,5 +23,8 @@ public interface TravelPlanMapper {
 
 	// 플랜에 추가되어있는 장소 삭제하기
 	void deleteTravelPlan(TravelPlanDTO plan);
+
+	// 플랜 삭제하기
+	void deleteTravelPlace(TravelPlanDTO plan);
 	
 }

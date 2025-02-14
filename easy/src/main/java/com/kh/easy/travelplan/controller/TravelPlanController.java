@@ -68,12 +68,24 @@ public class TravelPlanController {
 		return ResponseEntity.status(HttpStatus.CREATED).body("메모 저장 성공");
 	}
 	
-	@DeleteMapping
+	@DeleteMapping("/delete/place")
 	public ResponseEntity<?> deleteTravelPlace(@RequestBody TravelPlanDTO plan){
+		
+		log.info(plan.getUserId());
 		
 		service.deleteTravelPlace(plan);
 		
 		return ResponseEntity.ok("장소 삭제 성공");
+	}
+
+	@DeleteMapping("/delete/plan")
+	public ResponseEntity<?> deleteTravelPlan(@RequestBody TravelPlanDTO plan){
+
+		log.info(plan.getUserId());
+		
+		service.deleteTravelPlan(plan);
+		
+		return ResponseEntity.ok("플랜 삭제 성공");
 	}
 	
 }
