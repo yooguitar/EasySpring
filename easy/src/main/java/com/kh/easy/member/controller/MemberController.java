@@ -3,10 +3,12 @@ package com.kh.easy.member.controller;
 import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.easy.auth.service.AuthenticationService;
@@ -49,6 +51,12 @@ public class MemberController {
 		String role = memberService.getRole(requestMember);
 		LoginResponse response = LoginResponse.builder().username(requestMember.getUserId()).role(role).tokens(tokens).build();
 		return ResponseEntity.ok(response);
+	}
+	
+	@GetMapping("findUser")
+	public ResponseEntity<MemberDTO> findUser(@RequestParam("username") String username){
+		MemberDTO result = memberService.findUser(username);
+		return ResponseEntity.ok(result);
 	}
 	
 	@PutMapping("changePassword")

@@ -50,8 +50,9 @@ public class SecurityConfigure {
 				.csrf(AbstractHttpConfigurer::disable)
 				.cors(Customizer.withDefaults())
 				.authorizeHttpRequests(requests -> {
-					//requests.requestMatchers("/admin/**").hasRole("ADMIN");
-					requests.requestMatchers("/member", "/member/login", "/member/join", "/admin/**").permitAll();
+					requests.requestMatchers("/admin/**").hasRole("ADMIN");
+					requests.requestMatchers("/member", "/member/login", "/member/join").permitAll();
+					requests.requestMatchers(HttpMethod.GET, "/member/findUser").authenticated();
 					requests.requestMatchers(HttpMethod.PUT, "/member/**").authenticated();
 					requests.requestMatchers(HttpMethod.POST, "/member/refresh").authenticated();
 				})
