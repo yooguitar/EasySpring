@@ -35,7 +35,7 @@ public class JwtFilter extends OncePerRequestFilter {
 		String authorization = request.getHeader(HttpHeaders.AUTHORIZATION);
 
 		if (authorization == null || !authorization.startsWith("Bearer ")) {
-			log.error("autorization이 없어요~");
+			log.error("접근 권한이 없습니다");
 			filterChain.doFilter(request, response);
 			return;
 		}
@@ -52,7 +52,7 @@ public class JwtFilter extends OncePerRequestFilter {
 			authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 		} catch (ExpiredJwtException e) {
-			log.info("AccessToken 만료");
+			log.info("만료된 AccessToken");
 			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 			response.getWriter().write("토큰 검증에 실패했습니다.");
 			return;

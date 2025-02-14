@@ -13,7 +13,7 @@ public class Member {
 	private String userId;
 	private String userPwd;
 	private String email;
-	private String roll;
+	private String role;
 	private String status;
 	private String enrollDate;
 }
