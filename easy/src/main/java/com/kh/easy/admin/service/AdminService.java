@@ -1,11 +1,11 @@
 package com.kh.easy.admin.service;
 
-import java.util.Map;
+import java.util.List;
 
 public interface AdminService {
 
 	/* 회원 관리 콘솔 */
-	Map<String, String> findMembers(int page);
+	String findMembers(int page);
 	String findMembersAsc(int page);
 	String findByMail(int page);
 	String findByMailAsc(int page);
@@ -14,8 +14,11 @@ public interface AdminService {
 	String findByDate(int page);
 	String findByDateAsc(int page);
 	String findAdmin(int page);
+	int findTotalCount();
 	
 	// 검색 기능
 	void searchById(String searched);
 	void searchByEmail(String searched);
+	void blockUser(List<String> users);
+	void unblockUser(List<String> users);
 }

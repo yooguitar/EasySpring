@@ -57,6 +57,10 @@ public interface MemberMapper {
 	
 	ArrayList<Member> searchByEmail(String searched);
 
+	void blockUser(List<String> users);
+
+	void unblockUser(List<String> users);
+
 	
 	
 

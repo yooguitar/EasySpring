@@ -16,6 +16,6 @@ public interface TokenMapper {
 
 	RefreshTokenDTO findByToken(String refreshToken);
 
-	void deleteRefToken(Map<String, String> username);
+	void deleteRefToken(String username);
 
 }

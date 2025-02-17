@@ -167,6 +167,32 @@
 	      USER_ID DESC
 </select>
 
+<update id="blockUser">
+	UPDATE
+		   MEMBER
+	   SET
+	   	   STATUS = 'N'
+	 WHERE
+	  	   USER_ID 
+	  	IN
+	       <foreach item="id" collection="list" open="(" separator="," close=")">
+        		#{id}
+    	   </foreach>
+</update>
+
+<update id="unblockUser">
+	UPDATE
+		   MEMBER
+	   SET
+	   	   STATUS = 'Y'
+	 WHERE
+	  	   USER_ID 
+	  	IN
+	       <foreach item="id" collection="list" open="(" separator="," close=")">
+        		#{id}
+    	   </foreach>
+</update>
+
 
 
 

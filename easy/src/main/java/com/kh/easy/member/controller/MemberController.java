@@ -3,6 +3,7 @@ package com.kh.easy.member.controller;
 import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -80,10 +81,11 @@ public class MemberController {
 		return ResponseEntity.ok(newTokens);
 	}
 	
-//	@DeleteMapping("deleteRefToken")
-//	public void deleteRefToken(@RequestBody Map<String, String> username) {
-//		log.info("뭐가 오니",username);
-//		//tokenService.deleteRefToken(username);
-//	}
+	@DeleteMapping("deleteRefToken")
+	public ResponseEntity<?> deleteRefToken(@RequestParam("username") String username) {
+		log.info("안넘어옴? {}",username);
+		tokenService.deleteRefToken(username);
+		return ResponseEntity.ok("로그아웃");
+	}
 	
 }

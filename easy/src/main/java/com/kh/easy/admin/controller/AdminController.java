@@ -1,9 +1,11 @@
 package com.kh.easy.admin.controller;
 
-import java.util.Map;
+import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,8 +34,7 @@ public class AdminController {
 	 */
 	@GetMapping("findMembers")
 	public ResponseEntity<?> findMembers(@RequestParam(value="page", defaultValue="1") int page){
-		Map<String, String> resultMap = adminService.findMembers(page);
-		return ResponseEntity.ok(resultMap);
+		return ResponseEntity.ok(adminService.findMembers(page));
 	}
 	@GetMapping("findMembersAsc")
 	public ResponseEntity<String> findMembersAsc(@RequestParam(value="page", defaultValue="1") int page){
@@ -67,7 +68,24 @@ public class AdminController {
 	public ResponseEntity<String> findAdmin(@RequestParam(value="page", defaultValue="1") int page){
 		return ResponseEntity.ok(adminService.findAdmin(page));
 	}
+	@GetMapping("findTotalCount")
+	public int findTotalCount() {
+		return adminService.findTotalCount();
+	}
 	
+	// 회원 수정 관련
+	@PostMapping("blockUser")
+	public ResponseEntity<?> blockUser(@RequestBody List<String> users){
+		adminService.blockUser(users);
+		return ResponseEntity.ok("선택 회원을 비활성화 했습니다.");
+	}
+	
+	@PostMapping("unblockUser")
+	public ResponseEntity<?> unblockUser(@RequestBody List<String> users){
+		adminService.unblockUser(users);
+		return ResponseEntity.ok("선택 회원을 활성화 했습니다.");
+	}
+ 	
 	// 검색 기능
 	@GetMapping("searchById")
 	public ResponseEntity<?> searchById(){

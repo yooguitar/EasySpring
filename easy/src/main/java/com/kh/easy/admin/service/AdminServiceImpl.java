@@ -27,16 +27,7 @@ public class AdminServiceImpl implements AdminService {
 	private final AdminMapper adminMapper;
 	private final MemberMapper memberMapper;
 
-	/* 회원 관리 콘솔 */
-	private String JsonTranslator(ArrayList<Member> result) {
-		ObjectMapper objectMapper = new ObjectMapper();
-		try {
-			return objectMapper.writeValueAsString(result);
-		} catch (JsonProcessingException e) {
-			throw new NoSuchDataException("조회 결과가 없습니다.");
-		}
-	}
-	
+	/* 모듈 */
 	private String JsonTranslator(List<Member> result) {
 		ObjectMapper objectMapper = new ObjectMapper();
 		try {
@@ -45,16 +36,13 @@ public class AdminServiceImpl implements AdminService {
 			throw new NoSuchDataException("조회 결과가 없습니다.");
 		}
 	}
-	
 	private PageInfo getPageInfo(int totalCount, int page) {
 		return Pagination.getPageInfo(totalCount, page, 10, 10);
 	}
-	
 	private RowBounds getMemberList(PageInfo pageInfo){
 		int offset = (pageInfo.getCurrentPage() -1) * pageInfo.getBoardLimit();
 		return new RowBounds(offset, pageInfo.getBoardLimit());
 	}
-	
 	private int totalCount(int currentPage) {
 		int totalCount = memberMapper.findTotalCount();
 		if(totalCount == 0) {
@@ -62,30 +50,19 @@ public class AdminServiceImpl implements AdminService {
 		}
 		return totalCount;
 	}
-
+	
+	/* 회원 관리 콘솔 */
 	@Override
-	public Map<String, String> findMembers(int currentPage) {
-		// 앞단에 조회 결과와 총 행 개수를 같이 전달해줘야 함
-		int countRows = 0;
-		countRows = totalCount(currentPage);
-		PageInfo pageInfo = getPageInfo(countRows, currentPage);
-		List<Member> result = memberMapper.findMemberList(getMemberList(pageInfo));
-		String resultString = JsonTranslator(result);
-		Map<String, String> resultMap = new HashMap();
-		resultMap.put("resultString", resultString);
-		resultMap.put("countRows", Long.valueOf(countRows));
-		
-		//반환타입 고쳐야됨
-		
-		
-		return resultMap; 
+	public String findMembers(int currentPage) {	
+		int count = totalCount(currentPage);
+		PageInfo pageInfo = getPageInfo(count, currentPage);
+		return JsonTranslator(memberMapper.findMemberList(getMemberList(pageInfo)));
 	}
 
 	public String findMembersAsc(int currentPage) {
 		int count = totalCount(currentPage);
 		PageInfo pageInfo = getPageInfo(count, currentPage);
-		List<Member>result = memberMapper.findMemberListAsc(getMemberList(pageInfo));
-		return JsonTranslator(result);
+		return JsonTranslator(memberMapper.findMemberListAsc(getMemberList(pageInfo)));
 	}
 	
 	@Override
@@ -99,62 +76,79 @@ public class AdminServiceImpl implements AdminService {
 	public String findByMailAsc(int currentPage) {
 		int count = totalCount(currentPage);
 		PageInfo pageInfo = getPageInfo(count, currentPage);
-		List<Member>result = memberMapper.findByMailAsc(getMemberList(pageInfo));
-		return JsonTranslator(result);
+		return JsonTranslator(memberMapper.findByMailAsc(getMemberList(pageInfo)));
 	}
 
 	@Override
 	public String findByStatus(int currentPage) {
 		int count = totalCount(currentPage);
 		PageInfo pageInfo = getPageInfo(count, currentPage);
-		List<Member>result = memberMapper.findByStatus(getMemberList(pageInfo));
-		return JsonTranslator(result);
+		return JsonTranslator(memberMapper.findByStatus(getMemberList(pageInfo)));
 	}
 
 	@Override
 	public String findByStatusAsc(int currentPage) {
 		int count = totalCount(currentPage);
 		PageInfo pageInfo = getPageInfo(count, currentPage);
-		List<Member>result = memberMapper.findByStatusAsc(getMemberList(pageInfo));
-		return JsonTranslator(result);
+		return JsonTranslator(memberMapper.findByStatusAsc(getMemberList(pageInfo)));
 	}
 
 	@Override
 	public String findByDate(int currentPage) {
 		int count = totalCount(currentPage);
 		PageInfo pageInfo = getPageInfo(count, currentPage);
-		List<Member>result = memberMapper.findByDate(getMemberList(pageInfo));
-		return JsonTranslator(result);
+		return JsonTranslator(memberMapper.findByDate(getMemberList(pageInfo)));
 	}
 
 	@Override
 	public String findByDateAsc(int currentPage) {
 		int count = totalCount(currentPage);
 		PageInfo pageInfo = getPageInfo(count, currentPage);
-		List<Member>result = memberMapper.findByDateAsc(getMemberList(pageInfo));
-		return JsonTranslator(result);
+		return JsonTranslator(memberMapper.findByDateAsc(getMemberList(pageInfo)));
 	}
 
 	@Override
 	public String findAdmin(int currentPage) {
 		int count = totalCount(currentPage);
 		PageInfo pageInfo = getPageInfo(count, currentPage);
-		List<Member>result = memberMapper.findAdmin(getMemberList(pageInfo));
-		return JsonTranslator(result);
+		return JsonTranslator(memberMapper.findAdmin(getMemberList(pageInfo)));
 	}
+	
+	@Override
+	public int findTotalCount() {
+		return memberMapper.findTotalCount();
+	}
+	
+	@Override
+	public void blockUser(List<String> users) {
+		memberMapper.blockUser(users);
+	}
+
+	@Override
+	public void unblockUser(List<String> users) {
+		memberMapper.unblockUser(users);
+	}
+	
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+
 	
 	// 검색
 	@Override
 	public void searchById(String searched) {
-
+		
 	}
-
+	
 	@Override
 	public void searchByEmail(String searched) {
-
+		
 	}
-
-
-
-	
 }

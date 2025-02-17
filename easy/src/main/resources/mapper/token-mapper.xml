@@ -37,7 +37,7 @@
 		 	   TOKEN=#{refreshToken}
 	</select>
 	
-	<delete id="deleteRefToken" parameterType="Map">
+	<delete id="deleteRefToken" parameterType="String">
 		DELETE
 		  FROM	
 		       REFRESH_TOKEN

@@ -68,8 +68,7 @@ public class TokenServiceImpl implements TokenService {
 	}
 
 	@Override
-	public void deleteRefToken(Map<String, String> username) {
-		// 미구현
+	public void deleteRefToken(String username) {
 		tokenMapper.deleteRefToken(username);
 	}
 
