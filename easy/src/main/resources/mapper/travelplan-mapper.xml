@@ -6,15 +6,15 @@
 
 	<select id="selectPlanCode" parameterType="String" resultType="int">
 	  <![CDATA[
-	    SELECT MIN(possible_codes.plan_code) AS new_plan_code
-	      FROM (
-	    		SELECT LEVEL AS plan_code
-	      FROM dual
-	    	   CONNECT BY LEVEL <= (
-	    SELECT NVL(MAX(PLAN_CODE), 0)
-	       	   FROM TB_TRAVEL_PLAN
-	     WHERE USER_ID = #{userId}
-	    		) + 1
+	  SELECT MIN(possible_codes.plan_code) AS new_plan_code
+	  FROM (
+	    SELECT LEVEL AS plan_code
+	    FROM dual
+	    CONNECT BY LEVEL <= (
+	      SELECT NVL(MAX(PLAN_CODE), 0)
+	      FROM TB_TRAVEL_PLAN
+	      WHERE USER_ID = #{userId}
+	    ) + 1
 	  ) possible_codes
 	  WHERE possible_codes.plan_code NOT IN (
 	    SELECT PLAN_CODE

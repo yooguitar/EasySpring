@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.easy.travelplan.model.dto.TravelPlanDTO;
@@ -25,7 +26,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin("*")
 public class TravelPlanController {
 
 	private final TravelPlanService service;
@@ -41,9 +41,9 @@ public class TravelPlanController {
 	}
 	
 	@GetMapping("/list")
-	public ResponseEntity<Map<Long, List<TravelPlanDTO>>> selectTravlePlan(){
+	public ResponseEntity<Map<Long, List<TravelPlanDTO>>> selectTravlePlan(@RequestParam("userId") String userId){
 		
-		String userId = "user01";
+		log.info("여행목록불러오기 : {}", userId);
 		
 		Map<Long, List<TravelPlanDTO>> plans = service.selectTravelPlan(userId);
 		
@@ -53,17 +53,19 @@ public class TravelPlanController {
 	@PutMapping
 	public ResponseEntity<?> updateTravelPlan(@RequestBody TravelPlanDTO plan){
 		
+		log.info("{}", plan);
+		
 		service.updateTravelPlan(plan);
 		
 		return ResponseEntity.ok("플랜 업데이트 성공");
 	}
 	
 	@PutMapping("/memo")
-	public ResponseEntity<?> updateUserMemo(@RequestBody String userMemo){
+	public ResponseEntity<?> updateUserMemo(@RequestBody TravelPlanDTO plan){
 		
-		String userId = "user01";
+		log.info("{}", plan);
 		
-		service.updateUserMemo(userId, userMemo);
+		service.updateUserMemo(plan);
 		
 		return ResponseEntity.status(HttpStatus.CREATED).body("메모 저장 성공");
 	}
