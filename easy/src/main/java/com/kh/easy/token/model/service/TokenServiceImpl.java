@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.kh.easy.auth.model.vo.CustomUserDetails;
 import com.kh.easy.auth.util.JwtUtil;
-import com.kh.easy.member.model.mapper.MemberMapper;
 import com.kh.easy.token.model.dto.DeleteTokenDTO;
 import com.kh.easy.token.model.dto.RefreshTokenDTO;
 import com.kh.easy.token.model.mapper.TokenMapper;

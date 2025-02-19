@@ -35,7 +35,7 @@ public class JwtFilter extends OncePerRequestFilter {
 		String authorization = request.getHeader(HttpHeaders.AUTHORIZATION);
 
 		if (authorization == null || !authorization.startsWith("Bearer ")) {
-			log.error("접근 권한이 없습니다");
+			log.error("토큰 오류. 접근 권한이 없음");
 			filterChain.doFilter(request, response);
 			return;
 		}
@@ -43,7 +43,7 @@ public class JwtFilter extends OncePerRequestFilter {
 		try {
 			Claims claims = tokenUtil.parseJwt(token);
 			String username = claims.getSubject();
-			log.info("토큰 주인 아이디 : {}", username);
+			//log.info("토큰 주인 아이디 : {}", username);
 
 			UserDetails userDetails = userService.loadUserByUsername(username);
 

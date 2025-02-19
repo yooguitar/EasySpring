@@ -22,8 +22,8 @@ public class JwtUtil {
 	private String secretKey; 
 	private SecretKey key;
 
-	private long ACCESS_TOKEN_EXPIRED = 3600000 * 24;
-	private long REFRESH_TOKEN_EXPIRED = 3600000 * 72;
+	private long ACCESS_TOKEN_EXPIRED = 3600000;		// 1h
+	private long REFRESH_TOKEN_EXPIRED = 3600000 * 72;	// 3d
 
 	@PostConstruct
 	public void init() {
