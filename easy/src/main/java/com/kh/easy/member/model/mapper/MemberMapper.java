@@ -61,7 +61,7 @@ public interface MemberMapper {
 
 	void unblockUser(List<String> users);
 
-	
+	List<String> findEmail(List<String> reciever);
 	
 
 }

@@ -1,11 +1,9 @@
 package com.kh.easy.admin.service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -14,6 +12,7 @@ import com.kh.easy.admin.mapper.AdminMapper;
 import com.kh.easy.common.model.vo.PageInfo;
 import com.kh.easy.common.template.Pagination;
 import com.kh.easy.exception.NoSuchDataException;
+import com.kh.easy.member.model.dto.MailDTO;
 import com.kh.easy.member.model.dto.Member;
 import com.kh.easy.member.model.mapper.MemberMapper;
 
@@ -26,6 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 public class AdminServiceImpl implements AdminService {
 	private final AdminMapper adminMapper;
 	private final MemberMapper memberMapper;
+	private final JavaMailSenderImpl sender;
 
 	/* 모듈 */
 	private String JsonTranslator(List<Member> result) {
@@ -129,6 +129,20 @@ public class AdminServiceImpl implements AdminService {
 		memberMapper.unblockUser(users);
 	}
 	
+	@Override
+	public void mailForUser(MailDTO mails) {
+		// 할 일
+		// 1. reciever(List<String>)로 email 찾아오기
+		List<String> emails = memberMapper.findEmail(mails.getReciever());
+		/* 
+		 * 찾아 왔다. emails에는 string배열이 담겨있다.
+		 * */
+		// 2. 메일 보내주기
+		
+		
+		
+		
+	}
 
 
 	

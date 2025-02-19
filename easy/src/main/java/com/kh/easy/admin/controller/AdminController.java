@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.easy.admin.service.AdminService;
+import com.kh.easy.member.model.dto.MailDTO;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
  
@@ -84,6 +86,13 @@ public class AdminController {
 	public ResponseEntity<?> unblockUser(@RequestBody List<String> users){
 		adminService.unblockUser(users);
 		return ResponseEntity.ok("선택 회원을 활성화 했습니다.");
+	}
+	
+	// 메일링
+	@PostMapping("mailForUser")
+	public ResponseEntity<?> mailForUser(@Valid @RequestBody MailDTO mails){
+		adminService.mailForUser(mails);
+		return ResponseEntity.ok("메일 발송 성공!");
 	}
  	
 	// 검색 기능

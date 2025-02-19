@@ -193,7 +193,18 @@
     	   </foreach>
 </update>
 
-
+<select id="findEmail" parameterType="java.util.List" resultType="string">
+	SELECT
+		   EMAIL
+	  FROM 	
+	       MEMBER
+	 WHERE
+	 	   USER_ID
+	 	IN
+	 	   <foreach item="reciever" collection="list" open="(" separator="," close=")">
+	 	   		#{reciever}
+	 	   </foreach>
+</select>
 
 
 

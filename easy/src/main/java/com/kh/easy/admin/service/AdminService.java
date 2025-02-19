@@ -2,6 +2,8 @@ package com.kh.easy.admin.service;
 
 import java.util.List;
 
+import com.kh.easy.member.model.dto.MailDTO;
+
 public interface AdminService {
 
 	/* 회원 관리 콘솔 */
@@ -21,4 +23,5 @@ public interface AdminService {
 	void searchByEmail(String searched);
 	void blockUser(List<String> users);
 	void unblockUser(List<String> users);
+	void mailForUser(MailDTO mails);
 }

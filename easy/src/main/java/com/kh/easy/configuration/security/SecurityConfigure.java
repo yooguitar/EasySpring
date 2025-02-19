@@ -52,10 +52,10 @@ public class SecurityConfigure {
 				.authorizeHttpRequests(requests -> {
 					requests.requestMatchers("/admin/**").hasRole("ADMIN");
 					requests.requestMatchers("/member", "/member/login", "/member/join").permitAll();
+					requests.requestMatchers(HttpMethod.DELETE, "/member/deleteRefToken").permitAll();
 					requests.requestMatchers(HttpMethod.GET, "/member/findUser").authenticated();
 					requests.requestMatchers(HttpMethod.PUT, "/member/updateInfo").authenticated();
 					requests.requestMatchers(HttpMethod.POST, "/member/refresh").authenticated();
-					requests.requestMatchers(HttpMethod.DELETE, "/member/deleteRefToken").authenticated();
 				})
 				.sessionManagement(
 						sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
