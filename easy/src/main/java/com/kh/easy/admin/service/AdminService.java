@@ -2,6 +2,7 @@ package com.kh.easy.admin.service;
 
 import java.util.List;
 
+import com.kh.easy.exception.member.MessagingException;
 import com.kh.easy.member.model.dto.MailDTO;
 
 public interface AdminService {

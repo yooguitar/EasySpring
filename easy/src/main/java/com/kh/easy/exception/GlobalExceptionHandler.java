@@ -4,6 +4,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.kh.easy.exception.member.DuplicateUserException;
+import com.kh.easy.exception.member.MessagingException;
+import com.kh.easy.exception.member.MismatchPasswordException;
+import com.kh.easy.exception.member.NoSuchDataException;
 import com.kh.easy.exception.travel.NotEnoughLocationsException;
 import com.kh.easy.exception.travel.PlanStorageFullException;
 import com.kh.easy.exception.travel.TooManyLocationsException;
@@ -41,6 +45,11 @@ public class GlobalExceptionHandler {
 
 	@ExceptionHandler(NoSuchDataException.class)
 	public ResponseEntity<?> handleNoData(NoSuchDataException e) {
+		return ResponseEntity.badRequest().body(e.getMessage());
+	}
+	
+	@ExceptionHandler(MessagingException.class)
+	public ResponseEntity<?> handleMailError(MessagingException e){
 		return ResponseEntity.badRequest().body(e.getMessage());
 	}
 }

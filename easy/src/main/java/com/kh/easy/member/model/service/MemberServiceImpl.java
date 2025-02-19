@@ -9,8 +9,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.kh.easy.auth.model.vo.CustomUserDetails;
-import com.kh.easy.exception.DuplicateUserException;
-import com.kh.easy.exception.MismatchPasswordException;
+import com.kh.easy.exception.member.DuplicateUserException;
+import com.kh.easy.exception.member.MismatchPasswordException;
 import com.kh.easy.member.model.dto.ChangePasswordDTO;
 import com.kh.easy.member.model.dto.Member;
 import com.kh.easy.member.model.dto.MemberDTO;

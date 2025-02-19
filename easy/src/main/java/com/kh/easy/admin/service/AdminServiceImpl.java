@@ -1,9 +1,11 @@
 package com.kh.easy.admin.service;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -11,11 +13,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kh.easy.admin.mapper.AdminMapper;
 import com.kh.easy.common.model.vo.PageInfo;
 import com.kh.easy.common.template.Pagination;
-import com.kh.easy.exception.NoSuchDataException;
+import com.kh.easy.exception.member.NoSuchDataException;
 import com.kh.easy.member.model.dto.MailDTO;
 import com.kh.easy.member.model.dto.Member;
 import com.kh.easy.member.model.mapper.MemberMapper;
 
+import jakarta.activation.DataSource;
+import jakarta.activation.FileDataSource;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -36,24 +42,27 @@ public class AdminServiceImpl implements AdminService {
 			throw new NoSuchDataException("조회 결과가 없습니다.");
 		}
 	}
+
 	private PageInfo getPageInfo(int totalCount, int page) {
 		return Pagination.getPageInfo(totalCount, page, 10, 10);
 	}
-	private RowBounds getMemberList(PageInfo pageInfo){
-		int offset = (pageInfo.getCurrentPage() -1) * pageInfo.getBoardLimit();
+
+	private RowBounds getMemberList(PageInfo pageInfo) {
+		int offset = (pageInfo.getCurrentPage() - 1) * pageInfo.getBoardLimit();
 		return new RowBounds(offset, pageInfo.getBoardLimit());
 	}
+
 	private int totalCount(int currentPage) {
 		int totalCount = memberMapper.findTotalCount();
-		if(totalCount == 0) {
+		if (totalCount == 0) {
 			throw new NoSuchDataException("등록된 회원 정보가 없습니다.");
 		}
 		return totalCount;
 	}
-	
+
 	/* 회원 관리 콘솔 */
 	@Override
-	public String findMembers(int currentPage) {	
+	public String findMembers(int currentPage) {
 		int count = totalCount(currentPage);
 		PageInfo pageInfo = getPageInfo(count, currentPage);
 		return JsonTranslator(memberMapper.findMemberList(getMemberList(pageInfo)));
@@ -64,7 +73,7 @@ public class AdminServiceImpl implements AdminService {
 		PageInfo pageInfo = getPageInfo(count, currentPage);
 		return JsonTranslator(memberMapper.findMemberListAsc(getMemberList(pageInfo)));
 	}
-	
+
 	@Override
 	public String findByMail(int currentPage) {
 		int count = totalCount(currentPage);
@@ -113,12 +122,12 @@ public class AdminServiceImpl implements AdminService {
 		PageInfo pageInfo = getPageInfo(count, currentPage);
 		return JsonTranslator(memberMapper.findAdmin(getMemberList(pageInfo)));
 	}
-	
+
 	@Override
 	public int findTotalCount() {
 		return memberMapper.findTotalCount();
 	}
-	
+
 	@Override
 	public void blockUser(List<String> users) {
 		memberMapper.blockUser(users);
@@ -128,41 +137,42 @@ public class AdminServiceImpl implements AdminService {
 	public void unblockUser(List<String> users) {
 		memberMapper.unblockUser(users);
 	}
-	
+
 	@Override
 	public void mailForUser(MailDTO mails) {
-		// 할 일
-		// 1. reciever(List<String>)로 email 찾아오기
 		List<String> emails = memberMapper.findEmail(mails.getReciever());
-		/* 
-		 * 찾아 왔다. emails에는 string배열이 담겨있다.
-		 * */
-		// 2. 메일 보내주기
-		
-		
-		
-		
+
+		for (String s : emails) {
+			try {
+				MimeMessage message = sender.createMimeMessage();
+				MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+
+				helper.setTo(s);
+				helper.setSubject("[EasySchedule] " + mails.getMailTitle());
+				helper.setText(mails.getMailContent());
+				//helper.setFrom(mails.getSender());
+
+				DataSource source = new FileDataSource("src/main/resources/static/images/include.png");
+				// 빌드하게 되면 이미지 경로 외부로 빼야함
+				helper.addAttachment(source.getName(), source);
+
+				sender.send(message);
+				
+			} catch (MessagingException e) {
+				throw new RuntimeException("오류.메일 전송 실패!");
+			}
+		}
+
 	}
 
-
-	
-	
-	
-	
-	
-	
-	
-	
-
-	
 	// 검색
 	@Override
 	public void searchById(String searched) {
-		
+
 	}
-	
+
 	@Override
 	public void searchByEmail(String searched) {
-		
+
 	}
 }

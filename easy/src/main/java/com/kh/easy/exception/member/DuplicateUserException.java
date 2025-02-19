@@ -1,4 +1,4 @@
-package com.kh.easy.exception;
+package com.kh.easy.exception.member;
 
 public class DuplicateUserException extends RuntimeException{
 	
