@@ -102,7 +102,7 @@ public class TravelPlanServiceImpl implements TravelPlanService {
 	}
 	
 	@Override
-	public void updateUserMemo(String userId, String userMemo) {
+	public void updateUserMemo(TravelPlanDTO plan) {
 		
 		
 		
