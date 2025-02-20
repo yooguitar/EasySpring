@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.kh.easy.exception.member.DuplicateUserException;
 import com.kh.easy.exception.member.MessagingException;
 import com.kh.easy.exception.member.MismatchPasswordException;
+import com.kh.easy.exception.member.NoRecieverException;
 import com.kh.easy.exception.member.NoSuchDataException;
 import com.kh.easy.exception.travel.NotEnoughLocationsException;
 import com.kh.easy.exception.travel.PlanStorageFullException;
@@ -50,6 +51,11 @@ public class GlobalExceptionHandler {
 	
 	@ExceptionHandler(MessagingException.class)
 	public ResponseEntity<?> handleMailError(MessagingException e){
+		return ResponseEntity.badRequest().body(e.getMessage());
+	}
+	
+	@ExceptionHandler(NoRecieverException.class)
+	public ResponseEntity<?> handleEmptyRecieverError(NoRecieverException e){
 		return ResponseEntity.badRequest().body(e.getMessage());
 	}
 }

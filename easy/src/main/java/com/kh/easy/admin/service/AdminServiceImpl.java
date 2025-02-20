@@ -1,6 +1,5 @@
 package com.kh.easy.admin.service;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
@@ -13,6 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kh.easy.admin.mapper.AdminMapper;
 import com.kh.easy.common.model.vo.PageInfo;
 import com.kh.easy.common.template.Pagination;
+import com.kh.easy.exception.member.NoRecieverException;
 import com.kh.easy.exception.member.NoSuchDataException;
 import com.kh.easy.member.model.dto.MailDTO;
 import com.kh.easy.member.model.dto.Member;
@@ -140,6 +140,10 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public void mailForUser(MailDTO mails) {
+		if(mails.getReciever() == null) {
+			throw new NoRecieverException("수신자가 없습니다.");
+		}
+		
 		List<String> emails = memberMapper.findEmail(mails.getReciever());
 
 		for (String s : emails) {
