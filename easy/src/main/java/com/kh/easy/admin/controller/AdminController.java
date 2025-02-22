@@ -3,7 +3,6 @@ package com.kh.easy.admin.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -82,7 +81,6 @@ public class AdminController {
 		adminService.blockUser(users);
 		return ResponseEntity.ok("선택 회원을 비활성화 했습니다.");
 	}
-	
 	@PostMapping("unblockUser")
 	public ResponseEntity<?> unblockUser(@RequestBody List<String> users){
 		adminService.unblockUser(users);
@@ -93,6 +91,11 @@ public class AdminController {
 	@PostMapping("mailForUser")
 	public ResponseEntity<?> mailForUser(@Valid @RequestBody MailDTO mails){
 		adminService.mailForUser(mails);
+		return ResponseEntity.ok("메일 발송 성공!");
+	}
+	@PostMapping("mailForAll")
+	public ResponseEntity<?> mailForAll(@Valid @RequestBody MailDTO mails){
+		adminService.mailForAll(mails);
 		return ResponseEntity.ok("메일 발송 성공!");
 	}
  	

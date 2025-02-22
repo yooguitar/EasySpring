@@ -5,6 +5,8 @@ import java.util.List;
 import com.kh.easy.exception.member.MessagingException;
 import com.kh.easy.member.model.dto.MailDTO;
 
+import jakarta.validation.Valid;
+
 public interface AdminService {
 
 	/* 회원 관리 콘솔 */
@@ -25,4 +27,5 @@ public interface AdminService {
 	void blockUser(List<String> users);
 	void unblockUser(List<String> users);
 	void mailForUser(MailDTO mails);
+	void mailForAll(MailDTO mails);
 }
