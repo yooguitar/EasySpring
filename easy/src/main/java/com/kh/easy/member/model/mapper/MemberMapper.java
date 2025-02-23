@@ -25,6 +25,10 @@ public interface MemberMapper {
 
 	void deleteByPassword(String username);
 	
+	String findInfo(Map<String, String> email);
+	
+	String matchIdEmail(Map<String, String> request);
+	
 	/* 토큰 */
 	@Select("SELECT ROLE FROM MEMBER WHERE USER_ID=#{userId}")
 	String getRole(MemberDTO username);
@@ -64,6 +68,10 @@ public interface MemberMapper {
 	List<String> findEmail(List<String> reciever);
 
 	List<String> findEmailAll();
+
+	
+
+	
 	
 
 }

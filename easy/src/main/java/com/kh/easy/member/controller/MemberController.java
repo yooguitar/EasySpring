@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -69,6 +68,23 @@ public class MemberController {
 		return ResponseEntity.ok("정보 수정 성공!");
 	}
 	
+	@PostMapping("findInfo")
+	public ResponseEntity<String> findInfo(@Valid @RequestBody Map<String, String> email){
+		return ResponseEntity.ok(memberService.findInfo(email));
+	}
+	
+	@PostMapping("findPwd")
+	public ResponseEntity<?> findPwd(@Valid @RequestBody Map<String, String> request){
+		memberService.findPwd(request);
+		return ResponseEntity.ok("인증 메일이 발송 되었습니다.");
+	}
+	
+	@PostMapping("matchRandomNum")
+	public ResponseEntity<?> matchRandomNum(@RequestBody Map<String, String> request){
+		memberService.matchRandomNum(request);
+		return null;
+	}
+	
 	@PutMapping("delete")
 	public ResponseEntity<String> deletePassword(@RequestBody Map<String, String> password){
 		memberService.deleteByPassword(password);
@@ -76,8 +92,8 @@ public class MemberController {
 	}
 	
 	@PostMapping("refresh")
-	public ResponseEntity<Map> refresh(@RequestBody Map<String, String> tokens){
-		String refreshToken = tokens.get("refreshToken");
+	public ResponseEntity<Map> refresh(@RequestBody String refreshToken){
+		System.out.println("리프레쉬 토큰 확인 :" + refreshToken);
 		Map<String, String> newTokens = tokenService.refreshTokens(refreshToken);
 		return ResponseEntity.ok(newTokens);
 	}

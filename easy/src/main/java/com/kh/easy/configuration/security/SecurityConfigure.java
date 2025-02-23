@@ -51,11 +51,9 @@ public class SecurityConfigure {
 				.cors(Customizer.withDefaults())
 				.authorizeHttpRequests(requests -> {
 					requests.requestMatchers("/admin/**").hasRole("ADMIN");
-					requests.requestMatchers("/member", "/member/login", "/member/join").permitAll();
-					requests.requestMatchers(HttpMethod.DELETE, "/member/deleteRefToken").authenticated();
+					requests.requestMatchers("/member", "/member/login", "/member/join", "/member/refresh", "/member/deleteRefToken", "/member/findInfo", "/member/findPwd", "/member/matchRandomNum").permitAll();
 					requests.requestMatchers(HttpMethod.GET, "/member/findUser").authenticated();
 					requests.requestMatchers(HttpMethod.PUT, "/member/updateInfo").authenticated();
-					requests.requestMatchers(HttpMethod.POST, "/member/refresh").authenticated();
 				})
 				.sessionManagement(
 						sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

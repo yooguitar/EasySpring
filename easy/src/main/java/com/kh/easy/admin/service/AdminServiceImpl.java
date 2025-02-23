@@ -158,7 +158,6 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public void mailForAll(MailDTO mails) {
-		System.out.println("서비스에 옴");
 		List<String> emails = memberMapper.findEmailAll();
 		mailSender(mails, emails);
 	}
