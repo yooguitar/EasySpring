@@ -22,7 +22,7 @@ public class JwtUtil {
 	private String secretKey; 
 	private SecretKey key;
 
-	private long ACCESS_TOKEN_EXPIRED = 3600000;		// 1H	
+	private long ACCESS_TOKEN_EXPIRED = 5;		// 1H	
 	private long REFRESH_TOKEN_EXPIRED = 3600000 * 72;	// 3D
 
 	@PostConstruct

@@ -69,6 +69,8 @@ public interface MemberMapper {
 
 	List<String> findEmailAll();
 
+	String isMailUnique(String email);
+
 	
 
 	

@@ -67,6 +67,15 @@
 	 	   USER_ID=#{username}
 </update>
 
+<select id="isMailUnique" parameterType="string" resultType="string">
+	SELECT
+	       EMAIL
+	  FROM
+	       MEMBER
+	 WHERE
+	  	   EMAIL = #{email}
+</select>
+
 <update id="deleteByPassword" parameterType="String">
 	UPDATE
 		   MEMBER

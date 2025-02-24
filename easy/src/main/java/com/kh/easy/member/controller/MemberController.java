@@ -92,9 +92,10 @@ public class MemberController {
 	}
 	
 	@PostMapping("refresh")
-	public ResponseEntity<Map> refresh(@RequestBody String refreshToken){
-		System.out.println("리프레쉬 토큰 확인 :" + refreshToken);
-		Map<String, String> newTokens = tokenService.refreshTokens(refreshToken);
+	public ResponseEntity<?> refresh(@RequestBody String refreshToken){
+		//System.out.println("리프레쉬 토큰 확인 :" + refreshToken.replaceAll("=(String)", "").substring(0, refreshToken.length()-1));
+		Map<String, String> newTokens = tokenService.refreshTokens(refreshToken.replaceAll("=(String)", "").substring(0, refreshToken.length()-1));
+		log.info("뉴토큰: {}", newTokens);
 		return ResponseEntity.ok(newTokens);
 	}
 	

@@ -34,7 +34,7 @@
 		  FROM
 		       REFRESH_TOKEN
 		 WHERE
-		 	   TOKEN=#{refreshToken}
+		 	   TOKEN = #{refreshToken}
 	</select>
 	
 	<delete id="deleteRefToken" parameterType="String">
