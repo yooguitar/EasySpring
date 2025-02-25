@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.kh.easy.exception.member.DuplicateUserException;
+import com.kh.easy.exception.member.ExpiredTimeException;
 import com.kh.easy.exception.member.MessagingException;
 import com.kh.easy.exception.member.MismatchPasswordException;
 import com.kh.easy.exception.member.NoRecieverException;
@@ -56,6 +57,11 @@ public class GlobalExceptionHandler {
 	
 	@ExceptionHandler(NoRecieverException.class)
 	public ResponseEntity<?> handleEmptyRecieverError(NoRecieverException e){
+		return ResponseEntity.badRequest().body(e.getMessage());
+	}
+	
+	@ExceptionHandler(ExpiredTimeException.class)
+	public ResponseEntity<?> handleTimeover(ExpiredTimeException e){
 		return ResponseEntity.badRequest().body(e.getMessage());
 	}
 }

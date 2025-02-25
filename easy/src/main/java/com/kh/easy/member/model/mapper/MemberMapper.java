@@ -71,6 +71,14 @@ public interface MemberMapper {
 
 	String isMailUnique(String email);
 
+	void verification(Map<String, String> verification);
+
+	void clearVerification(String userId);
+
+	Map<String, String> findVerification(String userId);
+
+	void newPwd(Map<String, String> request);
+
 	
 
 	

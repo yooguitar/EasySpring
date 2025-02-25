@@ -36,10 +36,10 @@ public class JwtFilter extends OncePerRequestFilter {
 		String authorization = request.getHeader(HttpHeaders.AUTHORIZATION);
 		
 		
-		log.info(request.getRequestURI());
-		if("/member/refresh".equals(request.getRequestURI())) {
-			log.info("맞음?");
-		}
+//		log.info(request.getRequestURI());
+//		if("/member/refresh".equals(request.getRequestURI())) {
+//			log.info("맞음?");
+//		}
 
 		if (authorization == null || !authorization.startsWith("Bearer ")) {
 			log.error("토큰 오류. 접근 권한이 없음");

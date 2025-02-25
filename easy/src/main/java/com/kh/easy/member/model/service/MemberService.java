@@ -25,5 +25,7 @@ public interface MemberService {
 
 	void matchRandomNum(Map<String, String> request);
 
+	void newPwd(Map<String, String> request);
+
 
 }

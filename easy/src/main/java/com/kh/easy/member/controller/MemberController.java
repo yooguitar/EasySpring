@@ -69,12 +69,18 @@ public class MemberController {
 	}
 	
 	@PostMapping("findInfo")
-	public ResponseEntity<String> findInfo(@Valid @RequestBody Map<String, String> email){
+	public ResponseEntity<String> findInfo(@RequestBody Map<String, String> email){
 		return ResponseEntity.ok(memberService.findInfo(email));
 	}
-	
+
+	/**
+	 * Map 으로 Member 관련 필드 한두개만 받는 메소드들
+	 * MemberDTO로 받아야 @Valid로 입력 양식에 맞는지 필터링 할 수 있지만.. 
+	 * userId,userPwd가 NotBlank라 바꾸기 시작하면 수정사항이 너무 많아짐 
+	 * 일단 패스
+	 */
 	@PostMapping("findPwd")
-	public ResponseEntity<?> findPwd(@Valid @RequestBody Map<String, String> request){
+	public ResponseEntity<?> findPwd(@RequestBody Map<String, String> request){
 		memberService.findPwd(request);
 		return ResponseEntity.ok("인증 메일이 발송 되었습니다.");
 	}
@@ -82,7 +88,13 @@ public class MemberController {
 	@PostMapping("matchRandomNum")
 	public ResponseEntity<?> matchRandomNum(@RequestBody Map<String, String> request){
 		memberService.matchRandomNum(request);
-		return null;
+		return ResponseEntity.ok("인증 성공!");
+	}
+	
+	@PutMapping("newPwd")
+	public ResponseEntity<?> newPwd(@RequestBody Map<String, String> request){
+		memberService.newPwd(request);
+		return ResponseEntity.ok("변경 완료! 다시 로그인 해주세요.");
 	}
 	
 	@PutMapping("delete")

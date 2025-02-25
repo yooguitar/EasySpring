@@ -248,5 +248,50 @@
 	       STATUS = 'Y'
 </select> 
 
+<insert id="verification" parameterType="map">
+	INSERT
+      INTO
+      	   VERIFICATION
+      	   (
+		   USER_ID,
+		   RANDOM_NUM,
+		   EXPIRED_AT
+		   )
+    VALUES
+           (
+		   #{userId},
+		   #{randomNum},
+		   #{expiredAt}	
+		   )
+</insert>
+
+<delete id="clearVerification" parameterType="string">
+	DELETE
+	  FROM
+		   VERIFICATION
+	 WHERE
+	  	   USER_ID = #{userId}  
+</delete>
+
+<select id="findVerification" parameterType="string" resultType="map">
+	SELECT
+		   USER_ID,
+		   RANDOM_NUM,
+		   EXPIRED_AT
+	  FROM	
+	       VERIFICATION
+	 WHERE
+	  	   USER_ID = #{userId}
+</select>
+
+<update id="newPwd" parameterType="map">
+	UPDATE
+           MEMBER
+       SET
+           USER_PWD = #{newPwd}
+     WHERE
+     	   USER_ID = #{userId}
+</update>
+
 
 </mapper>
