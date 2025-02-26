@@ -161,7 +161,6 @@ public class AdminServiceImpl implements AdminService {
 
 	private void mailSender(MailDTO mails, List<String> emails) {
 		DataSource source = new FileDataSource("src/main/resources/static/images/include.png"); // 빌드하게 되면 이미지 경로 외부로
-																								// 빼야함
 
 		for (String s : emails) {
 			System.out.println("메일발송 성공 목록: " + s);

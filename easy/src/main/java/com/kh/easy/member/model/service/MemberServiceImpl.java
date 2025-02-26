@@ -52,7 +52,7 @@ public class MemberServiceImpl implements MemberService {
 	public void updateInfo(@Valid ChangePasswordDTO changeEntity) {
 		String username = passwordMatches(changeEntity.getCurrentPassword());
 		String encodedPassword = passwordEncoder.encode(changeEntity.getNewPassword());
-		isMailUnique(changeEntity.getEmail());
+		// isMailUnique(changeEntity.getEmail());
 		Map<String, String> changeRequest = new HashMap();
 		changeRequest.put("username", username);
 		changeRequest.put("password", encodedPassword);
@@ -116,7 +116,6 @@ public class MemberServiceImpl implements MemberService {
 		verification.put("expiredAt", expiredAt);
 		memberMapper.clearVerification(userId);
 		memberMapper.verification(verification);
-		
 
 		MailDTO mail = new MailDTO();
 		mail.setSender("admin");
