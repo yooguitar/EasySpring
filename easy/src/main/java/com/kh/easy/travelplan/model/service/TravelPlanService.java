@@ -18,7 +18,6 @@ public interface TravelPlanService {
 	
 	void deleteTravelPlace(TravelPlanDTO plan);
 
-	void updateUserMemo(TravelPlanDTO plan);
 
 	void deleteTravelPlan(TravelPlanDTO plan);
 	

@@ -43,7 +43,7 @@ public class TravelPlanController {
 	@GetMapping("/list")
 	public ResponseEntity<Map<Long, List<TravelPlanDTO>>> selectTravlePlan(@RequestParam("userId") String userId){
 		
-		log.info("여행목록불러오기 : {}", userId);
+		//log.info("여행목록불러오기 : {}", userId);
 		
 		Map<Long, List<TravelPlanDTO>> plans = service.selectTravelPlan(userId);
 		
@@ -53,27 +53,18 @@ public class TravelPlanController {
 	@PutMapping
 	public ResponseEntity<?> updateTravelPlan(@RequestBody TravelPlanDTO plan){
 		
-		log.info("{}", plan);
+		//log.info("{}", plan);
 		
 		service.updateTravelPlan(plan);
 		
 		return ResponseEntity.ok("플랜 업데이트 성공");
 	}
-	
-	@PutMapping("/memo")
-	public ResponseEntity<?> updateUserMemo(@RequestBody TravelPlanDTO plan){
-		
-		log.info("{}", plan);
-		
-		service.updateUserMemo(plan);
-		
-		return ResponseEntity.status(HttpStatus.CREATED).body("메모 저장 성공");
-	}
+
 	
 	@DeleteMapping("/delete/place")
 	public ResponseEntity<?> deleteTravelPlace(@RequestBody TravelPlanDTO plan){
 		
-		log.info(plan.getUserId());
+		//log.info(plan.getUserId());
 		
 		service.deleteTravelPlace(plan);
 		
@@ -83,7 +74,7 @@ public class TravelPlanController {
 	@DeleteMapping("/delete/plan")
 	public ResponseEntity<?> deleteTravelPlan(@RequestBody TravelPlanDTO plan){
 
-		log.info(plan.getUserId());
+		//log.info(plan.getUserId());
 		
 		service.deleteTravelPlan(plan);
 		
