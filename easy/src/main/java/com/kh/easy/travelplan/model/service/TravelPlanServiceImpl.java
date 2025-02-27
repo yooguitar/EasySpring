@@ -101,13 +101,6 @@ public class TravelPlanServiceImpl implements TravelPlanService {
 		
 	}
 	
-	@Override
-	public void updateUserMemo(TravelPlanDTO plan) {
-		
-		
-		
-		
-	}
 
 
 
