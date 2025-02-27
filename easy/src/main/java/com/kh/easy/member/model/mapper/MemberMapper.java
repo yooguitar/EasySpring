@@ -21,9 +21,13 @@ public interface MemberMapper {
 
 	MemberDTO findByUserId(String userId);
 
-	void changePassword(Map<String, String> changeRequest);
+	void updateInfo(Map<String, String> changeRequest);
 
 	void deleteByPassword(String username);
+	
+	String findInfo(Map<String, String> email);
+	
+	String matchIdEmail(Map<String, String> request);
 	
 	/* 토큰 */
 	@Select("SELECT ROLE FROM MEMBER WHERE USER_ID=#{userId}")
@@ -56,6 +60,26 @@ public interface MemberMapper {
 	ArrayList<Member> searchById(String searched);
 	
 	ArrayList<Member> searchByEmail(String searched);
+
+	void blockUser(List<String> users);
+
+	void unblockUser(List<String> users);
+
+	List<String> findEmail(List<String> reciever);
+
+	List<String> findEmailAll();
+
+	String isMailUnique(String email);
+
+	void verification(Map<String, String> verification);
+
+	void clearVerification(String userId);
+
+	Map<String, String> findVerification(String userId);
+
+	void newPwd(Map<String, String> request);
+
+	
 
 	
 	

@@ -8,6 +8,6 @@ public interface TokenService {
 	
 	Map<String, String> refreshTokens(String refreshToken);
 
-	void deleteRefToken(Map<String, String> username);
+	void deleteRefToken(String username);
 
 }

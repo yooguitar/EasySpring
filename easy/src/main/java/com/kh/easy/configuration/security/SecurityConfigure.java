@@ -28,7 +28,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @EnableMethodSecurity
 public class SecurityConfigure {
-
+ 
 	private final JwtFilter filter;
 
 	@Bean
@@ -42,7 +42,7 @@ public class SecurityConfigure {
 		source.registerCorsConfiguration("/**", configuration);
 		return source;
 	}
-
+ 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 		return httpSecurity.formLogin(AbstractHttpConfigurer::disable)
@@ -51,10 +51,12 @@ public class SecurityConfigure {
 				.cors(Customizer.withDefaults())
 				.authorizeHttpRequests(requests -> {
 					requests.requestMatchers("/admin/**").hasRole("ADMIN");
-					requests.requestMatchers("/member", "/member/login", "/member/join").permitAll();
+					requests.requestMatchers("/member", "/member/login", "/member/join", "/member/refresh", "/member/deleteRefToken", "/member/findInfo", "/member/newPwd").permitAll();
+					requests.requestMatchers(HttpMethod.POST, "/member/findPwd", "/member/matchRandomNum").permitAll();
 					requests.requestMatchers(HttpMethod.GET, "/member/findUser").authenticated();
 					requests.requestMatchers(HttpMethod.PUT, "/member/**").authenticated();
 					requests.requestMatchers(HttpMethod.POST, "/member/refresh").authenticated();
+					requests.requestMatchers(HttpMethod.PUT, "/member/updateInfo").authenticated();
 					requests.requestMatchers("/map").permitAll();
 					requests.requestMatchers(HttpMethod.POST,"/map").authenticated();
 					requests.requestMatchers(HttpMethod.PUT,"/map").authenticated();

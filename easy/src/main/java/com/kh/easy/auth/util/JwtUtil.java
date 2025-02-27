@@ -17,17 +17,17 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Component
 public class JwtUtil {
-
+ 
 	@Value("${jwt.secret}")
 	private String secretKey; 
 	private SecretKey key;
 
-	private long ACCESS_TOKEN_EXPIRED = 3600000 * 24;
-	private long REFRESH_TOKEN_EXPIRED = 3600000 * 72;
+	private long ACCESS_TOKEN_EXPIRED = 3600000;		// 1H	
+	private long REFRESH_TOKEN_EXPIRED = 3600000 * 72;	// 3D
 
 	@PostConstruct
 	public void init() {
-		byte[] keyArr = Base64.getDecoder().decode(secretKey);
+		byte[] keyArr = Base64.getDecoder().decode(secretKey); 
 		this.key = Keys.hmacShaKeyFor(keyArr); 
 	}
 

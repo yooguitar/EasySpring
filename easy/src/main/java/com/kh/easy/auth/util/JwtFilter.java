@@ -32,18 +32,25 @@ public class JwtFilter extends OncePerRequestFilter {
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
+		
 		String authorization = request.getHeader(HttpHeaders.AUTHORIZATION);
+		
+		
+//		log.info(request.getRequestURI());
+//		if("/member/refresh".equals(request.getRequestURI())) {
+//			log.info("맞음?");
+//		}
 
 		if (authorization == null || !authorization.startsWith("Bearer ")) {
-			log.error("접근 권한이 없습니다");
+			log.error("토큰 오류. 접근 권한이 없음");
 			filterChain.doFilter(request, response);
 			return;
 		}
 		String token = authorization.split(" ")[1];
 		try {
-			Claims claims = tokenUtil.parseJwt(token);
+			Claims claims = tokenUtil.parseJwt(token); 
 			String username = claims.getSubject();
-			log.info("토큰 주인 아이디 : {}", username);
+			//log.info("토큰 주인 아이디 : {}", username);
 
 			UserDetails userDetails = userService.loadUserByUsername(username);
 

@@ -21,6 +21,11 @@ bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
 
+.application-private.yml
+/application-private.yml
+application-private.yml
+
+
 ### IntelliJ IDEA ###
 .idea
 *.iws

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.kh.easy.auth.model.vo.CustomUserDetails;
 import com.kh.easy.auth.util.JwtUtil;
-import com.kh.easy.member.model.mapper.MemberMapper;
 import com.kh.easy.token.model.dto.DeleteTokenDTO;
 import com.kh.easy.token.model.dto.RefreshTokenDTO;
 import com.kh.easy.token.model.mapper.TokenMapper;
@@ -39,10 +38,17 @@ public class TokenServiceImpl implements TokenService {
 		if (token == null || token.getExpiration() < System.currentTimeMillis()) {
 			throw new RuntimeException("사용할 수 없는 토큰입니다.");
 		}
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		CustomUserDetails user = (CustomUserDetails) auth.getPrincipal();
+		//Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		//CustomUserDetails user = (CustomUserDetails) auth.getPrincipal();
+		//return generateToken(user.getUsername());
+		
+		/*
+		 * 만료일 검사 => 만료 시 예외 추가
+		 * 남았다면 액세스 토큰 새로 만들어주기
+		 * */
+		
+		return generateToken(token.getUsername());
 
-		return generateToken(user.getUsername());
 	}
 
 	private Map<String, String> createTokens(String username) {
@@ -68,8 +74,7 @@ public class TokenServiceImpl implements TokenService {
 	}
 
 	@Override
-	public void deleteRefToken(Map<String, String> username) {
-		// 미구현
+	public void deleteRefToken(String username) {
 		tokenMapper.deleteRefToken(username);
 	}
 
